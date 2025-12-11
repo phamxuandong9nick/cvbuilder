@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>CV Builder V18.1 - Infinite Edition</title>
+    <title>CV Builder V18.2 - Infinite Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -26,7 +26,7 @@
             .bg-print-modern { -webkit-print-color-adjust: exact; print-adjust-color: exact; }
         }
         
-        /* Font Classes - Cập nhật thêm font mới */
+        /* Font Classes */
         .font-sans-std { font-family: 'Be Vietnam Pro', sans-serif; }
         .font-serif-std { font-family: 'Noto Serif', serif; }
         .font-mono-std { font-family: 'JetBrains Mono', monospace; }
@@ -34,7 +34,7 @@
         .font-elegant { font-family: 'Playfair Display', serif; }
         .font-clean { font-family: 'Open Sans', sans-serif; }
         
-        /* Các font mới thêm theo yêu cầu */
+        /* Các font mới */
         .font-consolas { font-family: 'Consolas', 'Monaco', 'Courier New', monospace; }
         .font-times { font-family: 'Times New Roman', 'Times', serif; }
         .font-arial { font-family: 'Arial', 'Helvetica', sans-serif; }
@@ -55,8 +55,8 @@
     <!-- Header -->
     <header class="bg-slate-900 text-white p-2 sm:p-3 shadow-md flex flex-wrap gap-2 justify-between items-center z-20 shrink-0">
         <div class="flex items-center gap-2 mr-2">
-            <div class="bg-gradient-to-r from-pink-500 to-violet-500 text-white w-8 h-8 rounded flex items-center justify-center font-bold text-sm">V18.1</div>
-            <h1 class="text-lg font-bold truncate hidden md:block">CV Builder Infinite</h1>
+            <div class="bg-gradient-to-r from-pink-500 to-violet-500 text-white w-8 h-8 rounded flex items-center justify-center font-bold text-sm">V18.2</div>
+            <h1 class="text-lg font-bold truncate hidden md:block">CV Builder</h1>
         </div>
         
         <!-- Toolbar V18 -->
@@ -66,18 +66,17 @@
                 <span class="text-xs text-slate-400 font-bold hidden sm:block"><i class="fa-solid fa-palette"></i> Màu:</span>
                 <input type="color" id="themeColorPicker" value="#1e3a8a" title="Chọn màu chủ đạo">
                 <div class="flex gap-1">
-                    <button onclick="app.setThemeColor('#1e3a8a')" class="w-5 h-5 rounded-full bg-[#1e3a8a] border border-white/20 hover:scale-110 transition" title="Classic Blue"></button>
-                    <button onclick="app.setThemeColor('#0f766e')" class="w-5 h-5 rounded-full bg-[#0f766e] border border-white/20 hover:scale-110 transition" title="Teal"></button>
-                    <button onclick="app.setThemeColor('#b91c1c')" class="w-5 h-5 rounded-full bg-[#b91c1c] border border-white/20 hover:scale-110 transition" title="Red"></button>
-                    <button onclick="app.setThemeColor('#334155')" class="w-5 h-5 rounded-full bg-[#334155] border border-white/20 hover:scale-110 transition" title="Slate"></button>
-                    <button onclick="app.setThemeColor('#7e22ce')" class="w-5 h-5 rounded-full bg-[#7e22ce] border border-white/20 hover:scale-110 transition" title="Purple"></button>
+                    <button onclick="app.setThemeColor('#1e3a8a')" class="w-4 h-4 rounded-full bg-[#1e3a8a] border border-white/20 hover:scale-110 transition" title="Classic Blue"></button>
+                    <button onclick="app.setThemeColor('#0f766e')" class="w-4 h-4 rounded-full bg-[#0f766e] border border-white/20 hover:scale-110 transition" title="Teal"></button>
+                    <button onclick="app.setThemeColor('#b91c1c')" class="w-4 h-4 rounded-full bg-[#b91c1c] border border-white/20 hover:scale-110 transition" title="Red"></button>
+                    <button onclick="app.setThemeColor('#334155')" class="w-4 h-4 rounded-full bg-[#334155] border border-white/20 hover:scale-110 transition" title="Slate"></button>
                 </div>
             </div>
 
             <!-- Font Selector -->
             <div class="flex items-center gap-2 bg-slate-800 px-2 py-1 rounded border border-slate-700">
                 <span class="text-xs text-slate-400 font-bold hidden sm:block"><i class="fa-solid fa-font"></i> Font:</span>
-                <select id="fontSelector" class="bg-slate-900 text-white border border-slate-600 rounded px-2 py-1 text-xs focus:outline-none w-28 sm:w-36">
+                <select id="fontSelector" class="bg-slate-900 text-white border border-slate-600 rounded px-2 py-1 text-xs focus:outline-none w-28">
                     <optgroup label="Standard">
                         <option value="font-sans-std">Standard Sans</option>
                         <option value="font-serif-std">Classic Serif</option>
@@ -97,8 +96,17 @@
             </div>
         </div>
 
-        <div class="flex gap-2 items-center justify-end flex-wrap">
-            <select id="langSelector" class="bg-slate-700 text-white border border-slate-500 rounded px-1 py-1.5 text-xs focus:outline-none font-bold"><option value="vi">VN</option><option value="en">EN</option><option value="zh">CN</option><option value="kr">KR</option><option value="jp">JP</option></select>
+        <div class="flex gap-1.5 items-center justify-end flex-wrap">
+            <!-- JSON Actions -->
+            <div class="flex bg-slate-800 rounded border border-slate-600 mr-1">
+                <button onclick="app.exportData()" class="text-white hover:bg-slate-700 px-2 py-1.5 rounded-l" title="Xuất JSON (Backup)"><i class="fa-solid fa-file-export text-amber-400"></i></button>
+                <div class="w-px bg-slate-600"></div>
+                <button onclick="document.getElementById('importInput').click()" class="text-white hover:bg-slate-700 px-2 py-1.5 rounded-r" title="Nhập JSON (Restore)"><i class="fa-solid fa-file-import text-sky-400"></i></button>
+                <input type="file" id="importInput" accept=".json" class="hidden" onchange="app.importData(this)">
+            </div>
+            
+            <select id="langSelector" class="bg-slate-700 text-white border border-slate-500 rounded px-1 py-1.5 text-xs focus:outline-none font-bold mr-1"><option value="vi">VN</option><option value="en">EN</option><option value="zh">CN</option><option value="kr">KR</option><option value="jp">JP</option></select>
+            
             <button onclick="app.exportHTML()" class="bg-blue-600 hover:bg-blue-700 px-3 py-1.5 rounded text-sm font-bold shadow text-white" title="Xuất HTML"><i class="fa-solid fa-code"></i></button>
             <button onclick="app.downloadPDF()" class="bg-green-600 hover:bg-green-700 px-3 py-1.5 rounded text-sm font-bold shadow text-white"><i class="fa-solid fa-download"></i> PDF</button>
         </div>
@@ -371,9 +379,88 @@
             
             // Generate HTML for export - Now includes CSS variables for colors
             exportHTML() {
-                // Implementation similar to renderPreview but returning full HTML
-                 const cvContent = document.getElementById('cv-preview').innerHTML;
-                 alert("Tính năng xuất HTML đang được cập nhật cho phiên bản Infinite.");
+                 try {
+                    const cvContent = document.getElementById('cv-preview').innerHTML;
+                    const currentTitle = this.data.fullName || 'Untitled CV';
+                    const templateId = this.data.template;
+
+                    let fonts = "";
+                    const generalFonts = '<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@400;700&family=Noto+Sans+KR:wght@400;700&family=Noto+Sans+JP:wght@400;700&family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;700&family=Oswald:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&family=Roboto+Slab:wght@300;400;700&family=Merriweather:wght@300;400;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">\n';
+                    
+                    const externalCSS = `
+                        <script src="https://cdn.tailwindcss.com"><\/script>
+                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+                        ${generalFonts}
+                    `;
+
+                    let internalCSS = `
+                        .a4-paper { 
+                            width: 210mm; 
+                            min-height: 297mm; 
+                            background: white; 
+                            margin: 0 auto; 
+                            position: relative; 
+                            box-shadow: 0 0 15px rgba(0,0,0,0.1); 
+                        }
+                        .no-break { page-break-inside: avoid; break-inside: avoid; }
+                        /* Font Classes */
+                        .font-sans-std { font-family: 'Be Vietnam Pro', sans-serif; }
+                        .font-serif-std { font-family: 'Noto Serif', serif; }
+                        .font-mono-std { font-family: 'JetBrains Mono', monospace; }
+                        .font-slab { font-family: 'Roboto Slab', serif; }
+                        .font-elegant { font-family: 'Playfair Display', serif; }
+                        .font-clean { font-family: 'Open Sans', sans-serif; }
+                        .font-consolas { font-family: 'Consolas', 'Monaco', 'Courier New', monospace; }
+                        .font-times { font-family: 'Times New Roman', 'Times', serif; }
+                        .font-arial { font-family: 'Arial', 'Helvetica', sans-serif; }
+                        
+                        .cv-avatar { object-fit: cover; }
+
+                        @media print { 
+                            * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+                            body { margin: 0; padding: 0; }
+                            .a4-paper { box-shadow: none; margin: 0; width: 100%; min-height: 100vh; }
+                        }
+                    `;
+                    
+                    const htmlTemplate = `<!DOCTYPE html>
+<html lang="${this.lang}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${currentTitle} - CV (${templateId.toUpperCase()})</title>
+    ${externalCSS}
+    <style>
+        ${internalCSS}
+    </style>
+</head>
+<body class="p-0 m-0 print:m-0 print:p-0">
+    <!-- Generated by CV Builder V18.2 -->
+    <div class="a4-paper shadow-none">
+        ${cvContent}
+    </div>
+</body>
+</html>`;
+
+                    const dataStr = htmlTemplate;
+                    const blob = new Blob([dataStr], { type: "text/html" });
+                    const url = URL.createObjectURL(blob);
+                    
+                    const a = document.createElement('a');
+                    a.href = url;
+                    const safeName = (this.data.fullName || 'MyCV').replace(/[^a-z0-9]/gi, '_').replace(/_+/g, '_');
+                    a.download = `CV_${safeName}_${templateId}.html`;
+                    
+                    document.body.appendChild(a);
+                    a.click();
+                    
+                    setTimeout(() => {
+                        document.body.removeChild(a);
+                        URL.revokeObjectURL(url);
+                    }, 0);
+                } catch (e) {
+                    alert("Lỗi xuất file HTML: " + e.message);
+                }
             },
 
             importData(input) {
