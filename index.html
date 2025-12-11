@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>CV Builder V18.1 - Infinite Edition</title>
+    <title>CV Builder V17 - 20 Templates</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@400;700&family=Noto+Sans+KR:wght@400;700&family=Noto+Sans+JP:wght@400;700&family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;700&family=Oswald:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&family=Roboto+Slab:wght@300;400;700&family=Merriweather:wght@300;400;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@400;700&family=Noto+Sans+KR:wght@400;700&family=Noto+Sans+JP:wght@400;700&family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;700&family=Oswald:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
     <style>
         /* CSS Cơ bản */
@@ -18,89 +18,79 @@
         .no-break { page-break-inside: avoid; break-inside: avoid; }
         .page-marker { position: absolute; left: 0; width: 100%; height: 1px; border-top: 2px dashed rgba(255, 0, 0, 0.3); z-index: 50; pointer-events: none; display: flex; justify-content: flex-end; padding-right: 10px; }
         .page-marker::after { content: "End of Page " attr(data-page); font-size: 10px; color: red; background: rgba(255,255,255,0.8); padding: 2px; }
-        
         @media print { 
             body * { visibility: hidden; } #cv-preview, #cv-preview * { visibility: visible; } 
             #cv-preview { position: absolute; left: 0; top: 0; width: 100%; margin: 0; transform: none !important; }
             .page-marker { display: none !important; }
             .bg-print-modern { -webkit-print-color-adjust: exact; print-adjust-color: exact; }
         }
-        
-        /* Font Classes - Cập nhật thêm font mới */
-        .font-sans-std { font-family: 'Be Vietnam Pro', sans-serif; }
-        .font-serif-std { font-family: 'Noto Serif', serif; }
-        .font-mono-std { font-family: 'JetBrains Mono', monospace; }
-        .font-slab { font-family: 'Roboto Slab', serif; }
-        .font-elegant { font-family: 'Playfair Display', serif; }
-        .font-clean { font-family: 'Open Sans', sans-serif; }
-        
-        /* Các font mới thêm theo yêu cầu */
-        .font-consolas { font-family: 'Consolas', 'Monaco', 'Courier New', monospace; }
-        .font-times { font-family: 'Times New Roman', 'Times', serif; }
-        .font-arial { font-family: 'Arial', 'Helvetica', sans-serif; }
-        
+        .lang-vi, .lang-en { font-family: 'Be Vietnam Pro', sans-serif; }
+        .lang-zh { font-family: 'Noto Sans SC', sans-serif; }
+        .lang-kr { font-family: 'Noto Sans KR', sans-serif; }
+        .lang-jp { font-family: 'Noto Sans JP', sans-serif; }
+        .template-classic.lang-vi, .template-classic.lang-en { font-family: 'Noto Serif', serif; }
+        .font-display { font-family: 'Montserrat', sans-serif; }
+        .font-serif-elegant { font-family: 'Playfair Display', serif; }
+        .font-mono-code { font-family: 'JetBrains Mono', monospace; }
+        .font-condensed { font-family: 'Oswald', sans-serif; }
+        .font-academic { font-family: 'Lora', serif; }
         .cv-avatar { object-fit: cover; }
         .mobile-hidden { display: none; }
         @media (min-width: 1024px) { .mobile-hidden { display: block !important; } .desktop-hidden { display: none !important; } }
         #focus-modal textarea { font-size: 18px; line-height: 1.6; }
-        
-        /* Color Picker Style */
-        input[type="color"] { -webkit-appearance: none; border: none; width: 32px; height: 32px; border-radius: 50%; overflow: hidden; cursor: pointer; padding: 0; }
-        input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
-        input[type="color"]::-webkit-color-swatch { border: none; border-radius: 50%; border: 2px solid #ddd; }
     </style>
 </head>
 <body class="bg-gray-100 font-sans h-screen flex flex-col overflow-hidden text-gray-800">
 
     <!-- Header -->
-    <header class="bg-slate-900 text-white p-2 sm:p-3 shadow-md flex flex-wrap gap-2 justify-between items-center z-20 shrink-0">
+    <header class="bg-indigo-800 text-white p-2 sm:p-3 shadow-md flex flex-wrap gap-2 justify-between items-center z-20 shrink-0">
         <div class="flex items-center gap-2 mr-2">
-            <div class="bg-gradient-to-r from-pink-500 to-violet-500 text-white w-8 h-8 rounded flex items-center justify-center font-bold text-sm">V18.1</div>
-            <h1 class="text-lg font-bold truncate hidden md:block">CV Builder Infinite</h1>
+            <i class="fa-solid fa-layer-group text-xl text-indigo-300"></i>
+            <h1 class="text-lg font-bold truncate hidden md:block">CV Builder V17</h1>
         </div>
-        
-        <!-- Toolbar V18 -->
-        <div class="flex gap-3 items-center flex-1 justify-center md:justify-start overflow-x-auto pb-1 md:pb-0 px-2">
-            <!-- Color Picker -->
-            <div class="flex items-center gap-2 bg-slate-800 px-2 py-1 rounded border border-slate-700">
-                <span class="text-xs text-slate-400 font-bold hidden sm:block"><i class="fa-solid fa-palette"></i> Màu:</span>
-                <input type="color" id="themeColorPicker" value="#1e3a8a" title="Chọn màu chủ đạo">
-                <div class="flex gap-1">
-                    <button onclick="app.setThemeColor('#1e3a8a')" class="w-5 h-5 rounded-full bg-[#1e3a8a] border border-white/20 hover:scale-110 transition" title="Classic Blue"></button>
-                    <button onclick="app.setThemeColor('#0f766e')" class="w-5 h-5 rounded-full bg-[#0f766e] border border-white/20 hover:scale-110 transition" title="Teal"></button>
-                    <button onclick="app.setThemeColor('#b91c1c')" class="w-5 h-5 rounded-full bg-[#b91c1c] border border-white/20 hover:scale-110 transition" title="Red"></button>
-                    <button onclick="app.setThemeColor('#334155')" class="w-5 h-5 rounded-full bg-[#334155] border border-white/20 hover:scale-110 transition" title="Slate"></button>
-                    <button onclick="app.setThemeColor('#7e22ce')" class="w-5 h-5 rounded-full bg-[#7e22ce] border border-white/20 hover:scale-110 transition" title="Purple"></button>
-                </div>
-            </div>
-
-            <!-- Font Selector -->
-            <div class="flex items-center gap-2 bg-slate-800 px-2 py-1 rounded border border-slate-700">
-                <span class="text-xs text-slate-400 font-bold hidden sm:block"><i class="fa-solid fa-font"></i> Font:</span>
-                <select id="fontSelector" class="bg-slate-900 text-white border border-slate-600 rounded px-2 py-1 text-xs focus:outline-none w-28 sm:w-36">
-                    <optgroup label="Standard">
-                        <option value="font-sans-std">Standard Sans</option>
-                        <option value="font-serif-std">Classic Serif</option>
+        <div class="flex gap-2 items-center flex-1 justify-end flex-wrap">
+            <div class="flex gap-1">
+                <select id="langSelector" class="bg-indigo-900 text-white border border-indigo-500 rounded px-1 py-1.5 text-xs focus:outline-none font-bold"><option value="vi">🇻🇳 VN</option><option value="en">🇺🇸 EN</option><option value="zh">🇨🇳 CN</option><option value="kr">🇰🇷 KR</option><option value="jp">🇯🇵 JP</option></select>
+                <select id="templateSelector" class="bg-indigo-700 text-white border border-indigo-500 rounded px-1 py-1.5 text-xs focus:outline-none max-w-[120px] sm:max-w-[160px]">
+                    <optgroup label="Popular">
+                        <option value="executive">Executive</option>
+                        <option value="modern">Modern</option>
+                        <option value="classic">Classic</option>
+                        <option value="minimal">Minimal</option>
+                        <option value="creative">Creative</option>
                     </optgroup>
-                    <optgroup label="Style">
-                        <option value="font-elegant">Elegant</option>
-                        <option value="font-mono-std">Tech Mono</option>
-                        <option value="font-slab">Roboto Slab</option>
-                        <option value="font-clean">Clean Open</option>
+                    <optgroup label="Style V15">
+                        <option value="glacial">Glacial</option>
+                        <option value="grid">Grid</option>
+                        <option value="stylish">Stylish</option>
+                        <option value="compact">Compact</option>
+                        <option value="tech">Tech</option>
                     </optgroup>
-                    <optgroup label="New Added">
-                        <option value="font-consolas">Consolas (Code)</option>
-                        <option value="font-times">Times New Roman</option>
-                        <option value="font-arial">Arial</option>
+                    <optgroup label="New V16">
+                        <option value="elegant">Elegant</option>
+                        <option value="circle">Circle</option>
+                        <option value="timeline">Timeline</option>
+                        <option value="split">Split</option>
+                        <option value="bold">Bold</option>
+                        <option value="artistic">Artistic</option>
+                        <option value="corporate">Corporate</option>
+                        <option value="startup">Startup</option>
+                        <option value="academic">Academic</option>
+                        <option value="night">Night</option>
                     </optgroup>
                 </select>
             </div>
-        </div>
-
-        <div class="flex gap-2 items-center justify-end flex-wrap">
-            <select id="langSelector" class="bg-slate-700 text-white border border-slate-500 rounded px-1 py-1.5 text-xs focus:outline-none font-bold"><option value="vi">VN</option><option value="en">EN</option><option value="zh">CN</option><option value="kr">KR</option><option value="jp">JP</option></select>
-            <button onclick="app.exportHTML()" class="bg-blue-600 hover:bg-blue-700 px-3 py-1.5 rounded text-sm font-bold shadow text-white" title="Xuất HTML"><i class="fa-solid fa-code"></i></button>
-            <button onclick="app.downloadPDF()" class="bg-green-600 hover:bg-green-700 px-3 py-1.5 rounded text-sm font-bold shadow text-white"><i class="fa-solid fa-download"></i> PDF</button>
+            <div class="flex gap-2 border-l border-indigo-500 pl-2">
+                <button onclick="app.clearData()" class="bg-gray-500 hover:bg-gray-600 px-3 py-1.5 rounded text-sm text-white" title="Xóa trắng"><i class="fa-solid fa-eraser"></i></button>
+                <button onclick="app.resetData()" class="bg-red-500 hover:bg-red-600 px-3 py-1.5 rounded text-sm text-white" title="Khôi phục CV Gốc"><i class="fa-solid fa-rotate-left"></i></button>
+                <button onclick="app.exportData()" class="bg-amber-500 hover:bg-amber-600 px-3 py-1.5 rounded text-sm text-white" title="Xuất JSON"><i class="fa-solid fa-file-export"></i></button>
+                <button onclick="document.getElementById('importInput').click()" class="bg-sky-500 hover:bg-sky-600 px-3 py-1.5 rounded text-sm text-white" title="Nhập JSON"><i class="fa-solid fa-file-import"></i></button>
+                <input type="file" id="importInput" accept=".json" class="hidden" onchange="app.importData(this)">
+                <!-- NEW HTML EXPORT BUTTON -->
+                <button onclick="app.exportHTML()" class="bg-blue-600 hover:bg-blue-700 px-3 py-1.5 rounded text-sm font-bold shadow-lg text-white" title="Xuất HTML"><i class="fa-solid fa-code"></i> HTML</button>
+                <!-- PDF BUTTON -->
+                <button onclick="app.downloadPDF()" class="bg-green-600 hover:bg-green-700 px-3 py-1.5 rounded text-sm font-bold shadow-lg text-white"><i class="fa-solid fa-download"></i> PDF</button>
+            </div>
         </div>
     </header>
 
@@ -108,47 +98,14 @@
     <main class="flex-1 flex flex-col lg:flex-row overflow-hidden relative">
         <!-- Editor Panel -->
         <section id="editor-panel" class="w-full lg:w-1/3 min-w-[350px] bg-white border-r overflow-y-auto p-4 sm:p-6 shadow-inner z-10 pb-20 lg:pb-6 relative">
-            
-            <div class="mb-6">
-                <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Chọn Bố Cục (Template)</label>
-                <select id="templateSelector" class="w-full bg-white border border-gray-300 text-gray-800 rounded p-2 text-sm focus:outline-none focus:border-indigo-500 shadow-sm font-bold">
-                    <optgroup label="Popular Layouts">
-                        <option value="executive">Executive (Chuyên nghiệp)</option>
-                        <option value="modern">Modern (Hiện đại)</option>
-                        <option value="classic">Classic (Cổ điển)</option>
-                        <option value="minimal">Minimal (Tối giản)</option>
-                        <option value="creative">Creative (Sáng tạo)</option>
-                    </optgroup>
-                    <optgroup label="Structured Layouts">
-                        <option value="glacial">Glacial (Thanh lịch)</option>
-                        <option value="grid">Grid (Lưới đậm)</option>
-                        <option value="stylish">Stylish (Thời trang)</option>
-                        <option value="compact">Compact (Gọn gàng)</option>
-                        <option value="tech">Tech (Công nghệ)</option>
-                    </optgroup>
-                    <optgroup label="Advanced Layouts">
-                        <option value="elegant">Elegant (Sang trọng)</option>
-                        <option value="circle">Circle (Điểm nhấn tròn)</option>
-                        <option value="timeline">Timeline (Dòng thời gian)</option>
-                        <option value="split">Split (Chia đôi)</option>
-                        <option value="bold">Bold (Mạnh mẽ)</option>
-                        <option value="artistic">Artistic (Nghệ thuật)</option>
-                        <option value="corporate">Corporate (Doanh nghiệp)</option>
-                        <option value="startup">Startup (Năng động)</option>
-                        <option value="academic">Academic (Học thuật)</option>
-                        <option value="night">Night (Giao diện tối)</option>
-                    </optgroup>
-                </select>
-            </div>
-
             <div class="flex justify-between items-center mb-4 border-b pb-2">
                 <h2 class="text-lg font-bold text-gray-700" id="lbl-editor-title">Thông tin CV</h2>
                 <span class="text-xs text-gray-400 lg:hidden">(Sửa tại đây)</span>
             </div>
             <form id="cvForm" oninput="app.updatePreview()">
                 <!-- Avatar -->
-                <div class="mb-5 bg-slate-50 p-4 rounded-lg border border-slate-100 relative">
-                    <h3 class="text-xs font-bold text-slate-600 uppercase mb-3" id="lbl-avatar">Ảnh đại diện</h3>
+                <div class="mb-5 bg-indigo-50 p-4 rounded-lg border border-indigo-100 relative">
+                    <h3 class="text-xs font-bold text-indigo-600 uppercase mb-3" id="lbl-avatar">Ảnh đại diện</h3>
                     <div class="flex items-center gap-4">
                         <label class="cursor-pointer group relative">
                             <div id="editor-avatar-preview" class="w-16 h-16 bg-gray-200 rounded-full overflow-hidden flex items-center justify-center border-4 border-white shadow-md group-hover:border-indigo-300 transition">
@@ -207,7 +164,7 @@
         <!-- Preview Panel -->
         <section id="preview-panel" class="w-full lg:flex-1 bg-gray-500 overflow-y-auto p-4 flex justify-center items-start mobile-hidden lg:block transition-all relative">
             <div id="preview-container" class="transition-transform duration-200 origin-top">
-                <div id="cv-preview" class="a4-paper transition-colors duration-300"></div>
+                <div id="cv-preview" class="a4-paper"></div>
             </div>
         </section>
 
@@ -239,8 +196,6 @@
 
         const ALEX_CHEN_DATA = {
             template: 'executive',
-            themeColor: '#1e3a8a',
-            font: 'font-sans-std',
             avatar: '', 
             fullName: 'NICK PHAM',
             jobTitle: 'Senior Full-Stack Developer | Team Lead',
@@ -260,30 +215,52 @@
         };
 
         const app = {
-            isMobileView: false, lang: 'vi',
-            data: JSON.parse(JSON.stringify(ALEX_CHEN_DATA)),
+            isMobileView: false, lang: 'vi', // Đặt ngôn ngữ mặc định là Tiếng Việt
+            data: JSON.parse(JSON.stringify(ALEX_CHEN_DATA)), // Load new default data
             focusTarget: null,
             t(key) { return (i18n[this.lang] || i18n['en'])[key] || key; },
 
+            // Helper để thoát các ký tự HTML cho thuộc tính value="..."
+            // Dùng chuẩn HTML entities để an toàn nhất.
             escapeForHtmlValue: (str) => {
                 if (!str) return '';
-                str = str.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-                return str.replace(/`/g, '&#96;').replace(/\$/g, '&#36;').replace(/\\/g, '&#92;');
+                // Escape essential HTML characters
+                str = str.replace(/&/g, '&amp;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#39;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;');
+                
+                // Escape JS template literal breakers for safety in the string construction
+                // NOTE: We rely on the browser's DOM parser to decode HTML entities in the form fields.
+                str = str.replace(/`/g, '&#96;') // Backtick
+                    .replace(/\$/g, '&#36;') // Dollar sign
+                    .replace(/\\/g, '&#92;'); // Backslash
+                
+                return str;
             },
             
+            // Helper để thoát ký tự HTML cho nội dung textContent
             escapeForHtmlContent: (str) => {
                 if (!str) return '';
-                return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+                return str
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#39;');
             },
 
             init() {
                 try { 
-                    const savedData = localStorage.getItem('cv_data_v18'); 
+                    const savedData = localStorage.getItem('cv_data_v17'); 
                     if (savedData) { 
                         const parsed = JSON.parse(savedData); 
+                        // Only override if data exists in localStorage
                         this.data = { ...ALEX_CHEN_DATA, ...parsed.data }; 
                         this.lang = parsed.lang || 'vi'; 
                     } else {
+                        // If no saved data, ensure the default language is what the user might expect (Vietnamese)
                         this.lang = 'vi';
                     }
                 } catch (e) {
@@ -291,29 +268,13 @@
                     this.lang = 'vi';
                 }
                 
-                // Set initial values for controls
-                if(!this.data.themeColor) this.data.themeColor = '#1e3a8a';
-                if(!this.data.font) this.data.font = 'font-sans-std';
-                
                 document.getElementById('templateSelector').value = this.data.template || 'executive'; 
                 document.getElementById('langSelector').value = this.lang;
-                document.getElementById('themeColorPicker').value = this.data.themeColor;
-                document.getElementById('fontSelector').value = this.data.font;
-
-                // Listeners
+                
                 document.getElementById('templateSelector').addEventListener('change', (e) => { this.data.template = e.target.value; this.saveAndRender(); });
                 document.getElementById('langSelector').addEventListener('change', (e) => { this.lang = e.target.value; this.updateUILanguage(); this.saveAndRender(); });
-                document.getElementById('themeColorPicker').addEventListener('input', (e) => { this.data.themeColor = e.target.value; this.saveAndRender(); });
-                document.getElementById('fontSelector').addEventListener('change', (e) => { this.data.font = e.target.value; this.saveAndRender(); });
-                
                 window.addEventListener('resize', this.handleResize.bind(this));
                 this.updateUILanguage(); this.renderForm(); this.renderPreview(); this.handleResize();
-            },
-            
-            setThemeColor(color) {
-                this.data.themeColor = color;
-                document.getElementById('themeColorPicker').value = color;
-                this.saveAndRender();
             },
 
             openFocusMode(target, index = null) {
@@ -343,19 +304,19 @@
 
             clearData() {
                 if(confirm("Xóa trắng toàn bộ để nhập mới?")) {
-                    this.data = { template: 'modern', themeColor: '#1e3a8a', font: 'font-sans-std', avatar: '', fullName: '', jobTitle: '', email: '', phone: '', address: '', summary: '', skills: '', experience: [{ company: '', position: '', period: '', desc: '' }], education: [{ school: '', degree: '', period: '' }] };
+                    this.data = { template: 'modern', avatar: '', fullName: '', jobTitle: '', email: '', phone: '', address: '', summary: '', skills: '', experience: [{ company: '', position: '', period: '', desc: '' }], education: [{ school: '', degree: '', period: '' }] };
                     this.updateEditorAvatar(); this.renderForm(); this.saveAndRender();
                 }
             },
             resetData() {
                 if(confirm("Khôi phục lại CV gốc của NICK PHAM?")) {
-                    localStorage.removeItem('cv_data_v18'); location.reload();
+                    localStorage.removeItem('cv_data_v17'); location.reload();
                 }
             },
 
             exportData() {
                 try {
-                    const exportObj = { data: this.data, lang: this.lang, version: 'v18' };
+                    const exportObj = { data: this.data, lang: this.lang, version: 'v17' };
                     const dataStr = JSON.stringify(exportObj, null, 2);
                     const blob = new Blob([dataStr], { type: "application/json" });
                     const url = URL.createObjectURL(blob);
@@ -368,12 +329,89 @@
                     setTimeout(() => { document.body.removeChild(a); URL.revokeObjectURL(url); }, 0);
                 } catch (e) { alert("Lỗi xuất file: " + e.message); }
             },
-            
-            // Generate HTML for export - Now includes CSS variables for colors
+
             exportHTML() {
-                // Implementation similar to renderPreview but returning full HTML
-                 const cvContent = document.getElementById('cv-preview').innerHTML;
-                 alert("Tính năng xuất HTML đang được cập nhật cho phiên bản Infinite.");
+                try {
+                    const cvContent = document.getElementById('cv-preview').innerHTML;
+                    const currentTitle = this.data.fullName || 'Untitled CV';
+                    const templateId = this.data.template;
+
+                    let fonts = "";
+                    const generalFonts = '<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;700&family=Oswald:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">\n';
+                    
+                    // FIX: Escaping closing script tag to prevent parser error
+                    const externalCSS = `
+                        <script src="https://cdn.tailwindcss.com"><\/script>
+                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+                        ${generalFonts}
+                    `;
+
+                    let internalCSS = `
+                        .a4-paper { 
+                            width: 210mm; 
+                            min-height: 297mm; 
+                            background: white; 
+                            margin: 0 auto; 
+                            position: relative; 
+                            box-shadow: 0 0 15px rgba(0,0,0,0.1); 
+                        }
+                        .no-break { page-break-inside: avoid; break-inside: avoid; }
+                        .lang-vi, .lang-en { font-family: 'Be Vietnam Pro', sans-serif; }
+                        .font-serif-elegant { font-family: 'Playfair Display', serif; }
+                        .font-mono-code { font-family: 'JetBrains Mono', monospace; }
+                        .font-condensed { font-family: 'Oswald', sans-serif; }
+                        .font-academic { font-family: 'Lora', serif; }
+                        .cv-avatar { object-fit: cover; }
+
+                        @media print { 
+                            * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+                            body { margin: 0; padding: 0; }
+                            .a4-paper { box-shadow: none; margin: 0; width: 100%; min-height: 100vh; }
+                        }
+                    `;
+                    if (templateId === 'modern') internalCSS += '.bg-print-modern { background: linear-gradient(to right, #1e293b 33.33%, #ffffff 33.33%) !important; }';
+                    if (templateId === 'stylish') internalCSS += '.bg-[#fffcf5] { background-color: #fffcf5 !important; } .text-[#d48c95] { color: #d48c95 !important; }';
+                    if (templateId === 'tech') internalCSS += '.bg-[#0d1117] { background-color: #0d1117 !important; } .text-[#c9d1d9] { color: #c9d1d9 !important; } .text-[#58a6ff] { color: #58a6ff !important; } .text-[#7ee787] { color: #7ee787 !important; } .text-[#ff7b72] { color: #ff7b72 !important; }';
+                    if (templateId === 'night') internalCSS += '.bg-slate-900 { background-color: #0f172a !important; } .text-slate-300 { color: #cbd5e1 !important; }';
+                    
+                    const htmlTemplate = `<!DOCTYPE html>
+<html lang="${this.lang}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${currentTitle} - CV (${templateId.toUpperCase()})</title>
+    ${externalCSS}
+    <style>
+        ${internalCSS}
+    </style>
+</head>
+<body class="p-0 m-0 print:m-0 print:p-0">
+    <!-- Generated by CV Builder -->
+    <div class="a4-paper shadow-none">
+        ${cvContent}
+    </div>
+</body>
+</html>`;
+
+                    const dataStr = htmlTemplate;
+                    const blob = new Blob([dataStr], { type: "text/html" });
+                    const url = URL.createObjectURL(blob);
+                    
+                    const a = document.createElement('a');
+                    a.href = url;
+                    const safeName = (this.data.fullName || 'MyCV').replace(/[^a-z0-9]/gi, '_').replace(/_+/g, '_');
+                    a.download = `CV_${safeName}_${templateId}.html`;
+                    
+                    document.body.appendChild(a);
+                    a.click();
+                    
+                    setTimeout(() => {
+                        document.body.removeChild(a);
+                        URL.revokeObjectURL(url);
+                    }, 0);
+                } catch (e) {
+                    alert("Lỗi xuất file HTML: " + e.message);
+                }
             },
 
             importData(input) {
@@ -387,7 +425,6 @@
                                 this.data = parsed.data; this.lang = parsed.lang || 'en';
                                 document.getElementById('templateSelector').value = this.data.template || 'executive';
                                 document.getElementById('langSelector').value = this.lang;
-                                if(this.data.themeColor) document.getElementById('themeColorPicker').value = this.data.themeColor;
                                 this.updateUILanguage(); this.renderForm(); this.updateEditorAvatar(); this.saveAndRender();
                                 alert('OK');
                             }
@@ -400,7 +437,7 @@
             handleImageUpload(e) { const f = e.target.files[0]; if(f){ if(f.size>5*1024*1024){alert("Max 5MB");return;} const r=new FileReader(); r.onload=(ev)=>{this.data.avatar=ev.target.result;this.updateEditorAvatar();this.saveAndRender();};r.readAsDataURL(f);} },
             removeImage() { this.data.avatar=''; document.getElementById('imageInput').value=''; this.updateEditorAvatar(); this.saveAndRender(); },
             updateEditorAvatar() { document.getElementById('editor-avatar-preview').innerHTML = this.data.avatar ? `<img src="${this.data.avatar}" class="w-full h-full object-cover">` : `<i class="fa-solid fa-user text-gray-400 text-3xl"></i>`; },
-            saveAndRender() { try { localStorage.setItem('cv_data_v18', JSON.stringify({ data: this.data, lang: this.lang })); } catch (e) {} this.renderPreview(); },
+            saveAndRender() { try { localStorage.setItem('cv_data_v17', JSON.stringify({ data: this.data, lang: this.lang })); } catch (e) {} this.renderPreview(); },
             updateUILanguage() { const els={'lbl-editor-title':'editorTitle','lbl-avatar':'avatar','btn-upload':'upload','btn-delete-img':'delete','lbl-exp':'experience','lbl-edu':'education','lbl-skills':'skills','btn-add-exp':'add','btn-add-edu':'add'}; for(const [id,k] of Object.entries(els)){const el=document.getElementById(id);if(el)el.textContent=this.t(k);} const phs={'ph-fullname':'fullName','ph-jobtitle':'jobTitle','ph-phone':'phone','ph-address':'address','ph-summary':'summaryPh','ph-skills':'skills'}; for(const [id,k] of Object.entries(phs)){document.getElementById(id).placeholder=this.t(k);} this.renderForm(); },
             
             toggleMobileView() { this.isMobileView = !this.isMobileView; document.getElementById('editor-panel').classList.toggle('mobile-hidden', this.isMobileView); document.getElementById('preview-panel').classList.toggle('mobile-hidden', !this.isMobileView); setTimeout(() => this.handleResize(), 10); },
@@ -417,8 +454,24 @@
 
             renderForm() {
                 this.updateEditorAvatar();
-                document.querySelectorAll('form > div > [data-model], form > div > div > [data-model]').forEach(i => { const k = i.getAttribute('data-model'); if(this.data[k] !== undefined) i.value = this.data[k]; });
-                document.getElementById('experience-list').innerHTML = this.data.experience.map((item, i) => `<div class="dynamic-item border p-4 rounded bg-gray-50 mb-3 relative group shadow-sm"><button type="button" onclick="app.removeItem('experience', ${i})" class="absolute top-2 right-2 text-red-400 p-2"><i class="fa-solid fa-trash"></i></button><input type="text" placeholder="${this.t('ph_company')}" class="d-company w-full mb-2 bg-transparent border-b font-bold text-base p-1" value="${this.escapeForHtmlValue(item.company)}"><div class="flex gap-2 mb-2"><input type="text" placeholder="${this.t('ph_position')}" class="d-position w-2/3 bg-transparent border-b text-sm p-1" value="${this.escapeForHtmlValue(item.position)}"><input type="text" placeholder="${this.t('ph_time')}" class="d-period w-1/3 bg-transparent border-b text-sm text-right p-1" value="${this.escapeForHtmlValue(item.period)}"></div><div class="relative mt-2"><textarea placeholder="${this.t('ph_desc')}" class="d-desc w-full bg-white border rounded p-2 text-sm h-24 focus:border-indigo-500 outline-none pr-10">${this.escapeForHtmlValue(item.desc||'')}</textarea><button type="button" onclick="app.openFocusMode('experience', ${i})" class="absolute top-2 right-2 text-indigo-500 hover:text-indigo-700 bg-gray-100 hover:bg-gray-200 p-2 rounded-full shadow border transition transform active:scale-95"><i class="fa-solid fa-expand"></i></button></div></div>`).join('');
+                
+                // Form rendering - escaping only essential HTML chars
+                document.querySelectorAll('form > div > [data-model], form > div > div > [data-model]').forEach(i => { 
+                    const k = i.getAttribute('data-model'); 
+                    if(this.data[k] !== undefined) i.value = this.data[k];
+                });
+                
+                document.getElementById('experience-list').innerHTML = this.data.experience.map((item, i) => `
+                    <div class="dynamic-item border p-4 rounded bg-gray-50 mb-3 relative group shadow-sm">
+                        <button type="button" onclick="app.removeItem('experience', ${i})" class="absolute top-2 right-2 text-red-400 p-2"><i class="fa-solid fa-trash"></i></button>
+                        <input type="text" placeholder="${this.t('ph_company')}" class="d-company w-full mb-2 bg-transparent border-b font-bold text-base p-1" value="${this.escapeForHtmlValue(item.company)}">
+                        <div class="flex gap-2 mb-2"><input type="text" placeholder="${this.t('ph_position')}" class="d-position w-2/3 bg-transparent border-b text-sm p-1" value="${this.escapeForHtmlValue(item.position)}"><input type="text" placeholder="${this.t('ph_time')}" class="d-period w-1/3 bg-transparent border-b text-sm text-right p-1" value="${this.escapeForHtmlValue(item.period)}"></div>
+                        <div class="relative mt-2">
+                            <textarea placeholder="${this.t('ph_desc')}" class="d-desc w-full bg-white border rounded p-2 text-sm h-24 focus:border-indigo-500 outline-none pr-10">${this.escapeForHtmlValue(item.desc||'')}</textarea>
+                            <button type="button" onclick="app.openFocusMode('experience', ${i})" class="absolute top-2 right-2 text-indigo-500 hover:text-indigo-700 bg-gray-100 hover:bg-gray-200 p-2 rounded-full shadow border transition transform active:scale-95"><i class="fa-solid fa-expand"></i></button>
+                        </div>
+                    </div>`).join('');
+                    
                 document.getElementById('education-list').innerHTML = this.data.education.map((item, i) => `<div class="dynamic-item border p-4 rounded bg-gray-50 mb-3 relative group shadow-sm"><button type="button" onclick="app.removeItem('education', ${i})" class="absolute top-2 right-2 text-red-400 p-2"><i class="fa-solid fa-trash"></i></button><input type="text" placeholder="${this.t('ph_school')}" class="d-school w-full mb-2 bg-transparent border-b font-bold text-base p-1" value="${this.escapeForHtmlValue(item.school)}"><div class="flex gap-2"><input type="text" placeholder="${this.t('ph_degree')}" class="d-degree w-2/3 bg-transparent border-b text-sm p-1" value="${this.escapeForHtmlValue(item.degree)}"><input type="text" placeholder="${this.t('ph_time')}" class="d-period w-1/3 bg-transparent border-b text-sm text-right p-1" value="${this.escapeForHtmlValue(item.period)}"></div></div>`).join('');
             },
 
@@ -427,34 +480,27 @@
                 const skills = d.skills.split(',').filter(s=>s.trim()); 
                 const escape = this.escapeForHtmlContent; 
                 const bullets = (txt) => (txt||'').split('\n').map(l=>l.trim()).filter(l=>l).map(l=>`<li>${escape(l)}</li>`).join(''); 
+                
                 const avatar = (cls) => d.avatar ? `<img src="${d.avatar}" class="${cls} cv-avatar">` : ''; 
-                
-                // --- THEME ENGINE ---
-                const TC = d.themeColor || '#1e3a8a'; // Theme Color
-                const fontClass = d.font || 'font-sans-std';
-                const containerClass = `h-full ${fontClass} ${d.template === 'night' ? 'bg-[#0f172a] text-slate-300' : 'bg-white text-gray-800'}`;
-                
+                const langClass = `lang-${this.lang}`; 
                 let html = '';
                 
-                // Helper to apply dynamic style
-                const styleText = `style="color: ${TC}"`;
-                const styleBg = `style="background-color: ${TC}"`;
-                const styleBorder = `style="border-color: ${TC}"`;
-                
-                // --- TEMPLATES ---
-                
                 if (d.template === 'modern') {
-                     html = `<div class="flex h-full ${containerClass}"><div class="w-1/3 text-white p-6 flex flex-col gap-6 no-break" style="background: linear-gradient(to bottom right, ${TC}, #1e293b);">${d.avatar?`<div class="mb-2 flex justify-center"><div class="w-32 h-32 rounded-full border-4 border-white/20 overflow-hidden">${avatar("w-full h-full object-cover")}</div></div>`:''}<div class="text-center"><h1 class="text-xl font-bold uppercase">${escape(d.fullName)}</h1><p class="text-white/80 text-xs mt-1 uppercase tracking-widest">${escape(d.jobTitle)}</p></div><div><h3 class="text-sm font-bold uppercase border-b border-white/30 pb-1 mb-3 text-white/90">${this.t('contact')}</h3><div class="text-xs space-y-2 text-white/80"><p>${escape(d.email)}</p><p>${escape(d.phone)}</p><p>${escape(d.address)}</p></div></div><div><h3 class="text-sm font-bold uppercase border-b border-white/30 pb-1 mb-3 text-white/90">${this.t('skills')}</h3><div class="flex flex-wrap gap-1">${skills.map(s=>`<span class="bg-white/10 px-2 py-1 text-[10px] rounded inline-block">${s.trim()}</span>`).join('')}</div></div><div><h3 class="text-sm font-bold uppercase border-b border-white/30 pb-1 mb-3 text-white/90">${this.t('education')}</h3><div class="space-y-3">${d.education.map(e=>`<div class="no-break"><p class="font-bold text-xs text-white">${escape(e.school)}</p><p class="text-[10px] text-white/80">${escape(e.degree)}</p><p class="text-[10px] text-white/60 italic">${e.period}</p></div>`).join('')}</div></div></div><div class="w-2/3 p-8 bg-white text-gray-800"><div class="mb-8 no-break"><h2 class="text-lg font-bold uppercase border-b-2 pb-2 mb-3" ${styleBorder} ${styleText}>${this.t('intro')}</h2><p class="text-sm text-gray-600 leading-relaxed text-justify">${escape(d.summary)}</p></div><div><h2 class="text-lg font-bold uppercase border-b-2 pb-2 mb-4" ${styleBorder} ${styleText}>${this.t('experience')}</h2><div class="space-y-6">${d.experience.map(exp=>`<div class="no-break"><div class="flex justify-between items-baseline mb-1"><h3 class="font-bold text-base text-gray-900">${escape(exp.company)}</h3><span class="text-xs font-semibold bg-gray-100 px-2 py-1 rounded text-gray-600">${exp.period}</span></div><p class="text-sm font-semibold mb-2" ${styleText}>${escape(exp.position)}</p><ul class="list-disc list-inside text-sm text-gray-600 space-y-1 pl-1 text-justify">${bullets(exp.desc)}</ul></div>`).join('')}</div></div></div></div>`;
+                    html = `<div class="flex h-full text-gray-800 ${langClass} bg-print-modern" style="background: linear-gradient(to right, #1e293b 33.33%, #ffffff 33.33%);"><div class="w-1/3 text-white p-6 flex flex-col gap-6 no-break">${d.avatar?`<div class="mb-2 flex justify-center"><div class="w-32 h-32 rounded-full border-4 border-white/20 overflow-hidden">${avatar("w-full h-full object-cover")}</div></div>`:''}<div class="text-center"><h1 class="text-xl font-bold uppercase">${escape(d.fullName)}</h1><p class="text-slate-300 text-xs mt-1 uppercase tracking-widest">${escape(d.jobTitle)}</p></div><div><h3 class="text-sm font-bold uppercase border-b border-slate-600 pb-1 mb-3 text-slate-400">${this.t('contact')}</h3><div class="text-xs space-y-2 text-slate-300"><p>${escape(d.email)}</p><p>${escape(d.phone)}</p><p>${escape(d.address)}</p></div></div><div><h3 class="text-sm font-bold uppercase border-b border-slate-600 pb-1 mb-3 text-slate-400">${this.t('skills')}</h3><div class="flex flex-wrap gap-1">${skills.map(s=>`<span class="bg-slate-700 px-2 py-1 text-[10px] rounded inline-block">${s.trim()}</span>`).join('')}</div></div><div><h3 class="text-sm font-bold uppercase border-b border-slate-600 pb-1 mb-3 text-slate-400">${this.t('education')}</h3><div class="space-y-3">${d.education.map(e=>`<div class="no-break"><p class="font-bold text-xs text-white">${escape(e.school)}</p><p class="text-[10px] text-slate-300">${escape(e.degree)}</p><p class="text-[10px] text-slate-400 italic">${e.period}</p></div>`).join('')}</div></div></div><div class="w-2/3 p-8 bg-white"><div class="mb-8 no-break"><h2 class="text-lg font-bold text-slate-800 uppercase border-b-2 border-slate-800 pb-2 mb-3">${this.t('intro')}</h2><p class="text-sm text-gray-600 leading-relaxed text-justify">${escape(d.summary)}</p></div><div><h2 class="text-lg font-bold text-slate-800 uppercase border-b-2 border-slate-800 pb-2 mb-4">${this.t('experience')}</h2><div class="space-y-6">${d.experience.map(exp=>`<div class="no-break"><div class="flex justify-between items-baseline mb-1"><h3 class="font-bold text-base text-slate-900">${escape(exp.company)}</h3><span class="text-xs font-semibold bg-slate-100 px-2 py-1 rounded text-slate-600">${exp.period}</span></div><p class="text-sm text-indigo-700 font-semibold mb-2">${escape(exp.position)}</p><ul class="list-disc list-inside text-sm text-gray-600 space-y-1 pl-1 text-justify">${bullets(exp.desc)}</ul></div>`).join('')}</div></div></div></div>`;
                 }
                 else if (d.template === 'executive') {
-                    html = `<div class="h-full bg-white text-gray-800 flex flex-col ${fontClass}"><div class="text-white p-10 flex items-center gap-8 no-break" ${styleBg}>${d.avatar ? `<div class="shrink-0 border-4 border-white/20 shadow-lg w-32 h-32 overflow-hidden">${avatar("w-full h-full object-cover")}</div>` : ''}<div><h1 class="text-3xl font-bold uppercase tracking-wide">${escape(d.fullName)}</h1><p class="text-white/80 text-lg mt-1 font-light uppercase tracking-widest">${escape(d.jobTitle)}</p><div class="flex gap-4 mt-4 text-xs text-white/70"><span><i class="fa-solid fa-envelope"></i> ${escape(d.email)}</span><span><i class="fa-solid fa-phone"></i> ${escape(d.phone)}</span><span><i class="fa-solid fa-location-dot"></i> ${escape(d.address)}</span></div></div></div><div class="flex flex-1 p-10 gap-10"><div class="w-2/3"><div class="mb-8 no-break"><h2 class="text-lg font-bold uppercase border-b-2 pb-2 mb-4" ${styleText} ${styleBorder}>${this.t('intro')}</h2><p class="text-sm text-gray-700 leading-relaxed text-justify">${escape(d.summary)}</p></div><div><h2 class="text-lg font-bold uppercase border-b-2 pb-2 mb-6" ${styleText} ${styleBorder}>${this.t('experience')}</h2><div class="space-y-6">${d.experience.map(exp=>`<div class="no-break"><div class="flex justify-between items-baseline mb-1"><h3 class="font-bold text-base text-gray-900 uppercase">${escape(exp.position)}</h3><span class="text-sm font-bold" ${styleText}>${exp.period}</span></div><p class="text-sm text-gray-600 italic mb-2">${escape(exp.company)}</p><ul class="list-disc list-inside text-sm text-gray-700 space-y-1.5 pl-1 text-justify">${bullets(exp.desc)}</ul></div>`).join('')}</div></div></div><div class="w-1/3 space-y-8"><div class="bg-gray-50 p-5 rounded-lg border border-gray-100 no-break"><h2 class="text-base font-bold uppercase mb-4" ${styleText}>${this.t('skills')}</h2><div class="flex flex-wrap gap-2">${skills.map(s=>`<span class="text-xs border px-2 py-1 bg-white font-semibold inline-block" style="color: ${TC}; border-color: ${TC}30">${s.trim()}</span>`).join('')}</div></div><div class="bg-gray-50 p-5 rounded-lg border border-gray-100 no-break"><h2 class="text-base font-bold uppercase mb-4" ${styleText}>${this.t('education')}</h2><div class="space-y-4">${d.education.map(e=>`<div class="border-b border-gray-200 pb-2 last:border-0 last:pb-0"><p class="font-bold text-sm text-gray-900">${escape(e.school)}</p><p class="text-xs text-gray-600 mt-1">${escape(e.degree)}</p><p class="text-xs font-semibold mt-1" ${styleText}>${e.period}</p></div>`).join('')}</div></div></div></div></div>`;
+                    html = `<div class="h-full bg-white text-gray-800 flex flex-col ${langClass}"><div class="bg-[#1e3a8a] text-white p-10 flex items-center gap-8 no-break">${d.avatar ? `<div class="shrink-0 border-4 border-white/20 shadow-lg w-32 h-32 overflow-hidden">${avatar("w-full h-full object-cover")}</div>` : ''}<div><h1 class="text-3xl font-bold uppercase tracking-wide font-display">${escape(d.fullName)}</h1><p class="text-blue-200 text-lg mt-1 font-light uppercase tracking-widest">${escape(d.jobTitle)}</p><div class="flex gap-4 mt-4 text-xs text-blue-100 opacity-80"><span><i class="fa-solid fa-envelope"></i> ${escape(d.email)}</span><span><i class="fa-solid fa-phone"></i> ${escape(d.phone)}</span><span><i class="fa-solid fa-location-dot"></i> ${escape(d.address)}</span></div></div></div><div class="flex flex-1 p-10 gap-10"><div class="w-2/3"><div class="mb-8 no-break"><h2 class="text-lg font-bold text-[#1e3a8a] uppercase border-b-2 border-[#1e3a8a] pb-2 mb-4 font-display">${this.t('intro')}</h2><p class="text-sm text-gray-700 leading-relaxed text-justify">${escape(d.summary)}</p></div><div><h2 class="text-lg font-bold text-[#1e3a8a] uppercase border-b-2 border-[#1e3a8a] pb-2 mb-6 font-display">${this.t('experience')}</h2><div class="space-y-6">${d.experience.map(exp=>`<div class="no-break"><div class="flex justify-between items-baseline mb-1"><h3 class="font-bold text-base text-gray-900 uppercase">${escape(exp.position)}</h3><span class="text-sm font-bold text-[#1e3a8a]">${exp.period}</span></div><p class="text-sm text-gray-600 italic mb-2">${escape(exp.company)}</p><ul class="list-disc list-inside text-sm text-gray-700 space-y-1.5 pl-1 text-justify">${bullets(exp.desc)}</ul></div>`).join('')}</div></div></div><div class="w-1/3 space-y-8"><div class="bg-gray-50 p-5 rounded-lg border border-gray-100 no-break"><h2 class="text-base font-bold text-[#1e3a8a] uppercase mb-4 font-display">${this.t('skills')}</h2><div class="flex flex-wrap gap-2">${skills.map(s=>`<span class="text-xs border border-blue-200 text-blue-900 px-2 py-1 bg-white font-semibold inline-block">${s.trim()}</span>`).join('')}</div></div><div class="bg-gray-50 p-5 rounded-lg border border-gray-100 no-break"><h2 class="text-base font-bold text-[#1e3a8a] uppercase mb-4 font-display">${this.t('education')}</h2><div class="space-y-4">${d.education.map(e=>`<div class="border-b border-gray-200 pb-2 last:border-0 last:pb-0"><p class="font-bold text-sm text-gray-900">${escape(e.school)}</p><p class="text-xs text-gray-600 mt-1">${escape(e.degree)}</p><p class="text-xs text-[#1e3a8a] font-semibold mt-1">${e.period}</p></div>`).join('')}</div></div></div></div></div>`;
+                }
+                else if (d.template === 'creative') {
+                    html = `<div class="h-full bg-white text-gray-800 flex relative ${langClass}"><div class="absolute top-0 left-0 w-[35%] h-full bg-teal-600 z-0"></div><div class="relative z-10 flex w-full h-full"><div class="w-[35%] p-8 pt-12 text-white flex flex-col h-full">${d.avatar ? `<div class="mx-auto mb-8 w-40 h-40 rounded-full overflow-hidden border-4 border-teal-400 shadow-xl shrink-0">${avatar("w-full h-full object-cover")}</div>` : '<div class="h-20"></div>'}<div class="mb-10"><h2 class="text-sm font-bold uppercase tracking-widest text-teal-200 mb-4 border-b border-teal-500 pb-2">${this.t('contact')}</h2><div class="space-y-3 text-sm font-light"><p class="flex items-center gap-3"><i class="fa-solid fa-envelope"></i> <span>${escape(d.email)}</span></p><p class="flex items-center gap-3"><i class="fa-solid fa-phone"></i> <span>${escape(d.phone)}</span></p><p class="flex items-center gap-3"><i class="fa-solid fa-location-dot"></i> <span>${escape(d.address)}</span></p></div></div><div class="mb-10"><h2 class="text-sm font-bold uppercase tracking-widest text-teal-200 mb-4 border-b border-teal-500 pb-2">${this.t('education')}</h2><div class="space-y-4">${d.education.map(e=>`<div class="bg-teal-700/50 p-3 rounded no-break"><p class="font-bold text-sm">${escape(e.school)}</p><p class="text-xs text-teal-100">${escape(e.degree)}</p><p class="text-[10px] text-teal-300 mt-1">${e.period}</p></div>`).join('')}</div></div><div><h2 class="text-sm font-bold uppercase tracking-widest text-teal-200 mb-4 border-b border-teal-500 pb-2">${this.t('skills')}</h2><div class="flex flex-wrap gap-2">${skills.map(s=>`<span class="bg-white text-teal-800 text-xs px-2 py-1 rounded font-bold inline-block">${s.trim()}</span>`).join('')}</div></div></div><div class="w-[65%] p-10 pt-12 flex flex-col"><div class="mb-10 no-break"><h1 class="text-5xl font-bold text-gray-800 mb-2 font-display uppercase leading-tight">${escape(d.fullName)}</h1><p class="text-xl text-teal-600 font-medium tracking-wide">${escape(d.jobTitle)}</p></div><div class="mb-10 no-break"><h2 class="flex items-center gap-3 text-lg font-bold text-gray-800 uppercase mb-4"><span class="w-8 h-1 bg-teal-500 block"></span> ${this.t('intro')}</h2><p class="text-sm text-gray-600 leading-relaxed text-justify bg-gray-50 p-4 rounded-r-lg border-l-4 border-teal-500">${escape(d.summary)}</p></div><div class="flex-1"><h2 class="flex items-center gap-3 text-lg font-bold text-gray-800 uppercase mb-6"><span class="w-8 h-1 bg-teal-500 block"></span> ${this.t('experience')}</h2><div class="space-y-8">${d.experience.map(exp=>`<div class="relative pl-6 border-l border-dashed border-gray-300 no-break"><div class="absolute -left-[5px] top-1.5 w-2.5 h-2.5 bg-teal-500 rounded-full ring-4 ring-white"></div><div class="flex justify-between items-baseline mb-1"><h3 class="font-bold text-lg text-gray-800">${escape(exp.position)}</h3><span class="text-xs font-bold text-teal-600 bg-teal-50 px-2 py-1 rounded">${exp.period}</span></div><p class="text-sm font-bold text-gray-500 mb-3">${escape(exp.company)}</p><ul class="text-sm text-gray-600 space-y-2 list-disc list-inside text-justify">${bullets(exp.desc)}</ul></div>`).join('')}</div></div></div></div></div>`;
                 }
                 else if (d.template === 'minimal') {
-                    html = `<div class="p-8 text-gray-800 h-full ${fontClass}"><div class="flex justify-between items-start mb-8 gap-6 border-b pb-8 no-break" ${styleBorder}>
+                    // Cập nhật template Minimal để căn chỉnh lại phần tiêu đề và thông tin liên hệ
+                    html = `<div class="p-8 text-gray-800 h-full ${langClass}"><div class="flex justify-between items-start mb-8 gap-6 border-b pb-8 no-break">
                         <div class="flex gap-5 items-center w-2/3">
                             ${d.avatar ? `<div class="w-24 h-24 rounded-full overflow-hidden bg-gray-100 shrink-0">${avatar("w-full h-full object-cover")}</div>` : ''}
                             <div>
-                                <h1 class="text-3xl font-light text-black tracking-tight mb-1 uppercase" ${styleText}>${escape(d.fullName)}</h1>
+                                <h1 class="text-3xl font-light text-black tracking-tight mb-1 uppercase">${escape(d.fullName)}</h1>
                                 <p class="text-gray-500 text-sm font-medium tracking-wide">${escape(d.jobTitle)}</p>
                             </div>
                         </div>
@@ -467,65 +513,75 @@
                     <div class="grid grid-cols-12 gap-8">
                         <div class="col-span-8">
                             <section class="mb-8 no-break">
-                                <h3 class="text-xs font-bold uppercase tracking-widest mb-3" ${styleText}>${this.t('intro')}</h3>
+                                <h3 class="text-xs font-bold text-gray-900 uppercase tracking-widest mb-3">${this.t('intro')}</h3>
                                 <p class="text-sm text-gray-600 leading-relaxed text-justify">${escape(d.summary)}</p>
                             </section>
                             <section>
-                                <h3 class="text-xs font-bold uppercase tracking-widest mb-6" ${styleText}>${this.t('experience')}</h3>
-                                <div class="space-y-8 border-l pl-6 ml-1" ${styleBorder}>
-                                    ${d.experience.map(exp=>`<div class="relative no-break"><div class="absolute -left-[29px] top-1.5 w-1.5 h-1.5 rounded-full" ${styleBg}></div><h4 class="font-bold text-sm text-gray-900">${escape(exp.position)}</h4><p class="text-xs text-gray-500 mb-2 font-mono">${escape(exp.company)} | ${exp.period}</p><ul class="text-sm text-gray-600 space-y-1 list-none text-justify">${bullets(exp.desc)}</ul></div>`).join('')}
+                                <h3 class="text-xs font-bold text-gray-900 uppercase tracking-widest mb-6">${this.t('experience')}</h3>
+                                <div class="space-y-8 border-l border-gray-200 pl-6 ml-1">
+                                    ${d.experience.map(exp=>`<div class="relative no-break"><div class="absolute -left-[29px] top-1.5 w-1.5 h-1.5 bg-gray-400 rounded-full"></div><h4 class="font-bold text-sm text-gray-900">${escape(exp.position)}</h4><p class="text-xs text-gray-500 mb-2 font-mono">${escape(exp.company)} | ${exp.period}</p><ul class="text-sm text-gray-600 space-y-1 list-none text-justify">${bullets(exp.desc)}</ul></div>`).join('')}
                                 </div>
                             </section>
                         </div>
                         <div class="col-span-4 space-y-8">
                             <section class="no-break">
-                                <h3 class="text-xs font-bold uppercase tracking-widest mb-4" ${styleText}>${this.t('skills')}</h3>
+                                <h3 class="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4">${this.t('skills')}</h3>
                                 <div class="flex flex-col gap-2 font-mono text-xs">${skills.map(s=>`<div class="border-b border-gray-100 pb-1">${s.trim()}</div>`).join('')}</div>
                             </section>
                             <section class="no-break">
-                                <h3 class="text-xs font-bold uppercase tracking-widest mb-4" ${styleText}>${this.t('education')}</h3>
+                                <h3 class="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4">${this.t('education')}</h3>
                                 ${d.education.map(e=>`<div class="mb-4"><p class="font-bold text-xs">${escape(e.school)}</p><p class="text-xs text-gray-600">${escape(e.degree)}</p><p class="text-[10px] text-gray-400 mt-1 font-mono">${e.period}</p></div>`).join('')}
                             </section>
                         </div>
                     </div></div>`;
                 }
-                else if (d.template === 'creative') {
-                    // Adjusted Creative to use Theme Color
-                    html = `<div class="h-full bg-white text-gray-800 flex relative ${fontClass}"><div class="absolute top-0 left-0 w-[35%] h-full z-0" ${styleBg}></div><div class="relative z-10 flex w-full h-full"><div class="w-[35%] p-8 pt-12 text-white flex flex-col h-full">${d.avatar ? `<div class="mx-auto mb-8 w-40 h-40 rounded-full overflow-hidden border-4 border-white/30 shadow-xl shrink-0">${avatar("w-full h-full object-cover")}</div>` : '<div class="h-20"></div>'}<div class="mb-10"><h2 class="text-sm font-bold uppercase tracking-widest text-white/80 mb-4 border-b border-white/30 pb-2">${this.t('contact')}</h2><div class="space-y-3 text-sm font-light"><p class="flex items-center gap-3"><i class="fa-solid fa-envelope"></i> <span>${escape(d.email)}</span></p><p class="flex items-center gap-3"><i class="fa-solid fa-phone"></i> <span>${escape(d.phone)}</span></p><p class="flex items-center gap-3"><i class="fa-solid fa-location-dot"></i> <span>${escape(d.address)}</span></p></div></div><div class="mb-10"><h2 class="text-sm font-bold uppercase tracking-widest text-white/80 mb-4 border-b border-white/30 pb-2">${this.t('education')}</h2><div class="space-y-4">${d.education.map(e=>`<div class="bg-black/10 p-3 rounded no-break"><p class="font-bold text-sm">${escape(e.school)}</p><p class="text-xs text-white/80">${escape(e.degree)}</p><p class="text-[10px] text-white/60 mt-1">${e.period}</p></div>`).join('')}</div></div><div><h2 class="text-sm font-bold uppercase tracking-widest text-white/80 mb-4 border-b border-white/30 pb-2">${this.t('skills')}</h2><div class="flex flex-wrap gap-2">${skills.map(s=>`<span class="bg-white text-gray-800 text-xs px-2 py-1 rounded font-bold inline-block">${s.trim()}</span>`).join('')}</div></div></div><div class="w-[65%] p-10 pt-12 flex flex-col"><div class="mb-10 no-break"><h1 class="text-5xl font-bold text-gray-800 mb-2 uppercase leading-tight">${escape(d.fullName)}</h1><p class="text-xl font-medium tracking-wide" ${styleText}>${escape(d.jobTitle)}</p></div><div class="mb-10 no-break"><h2 class="flex items-center gap-3 text-lg font-bold text-gray-800 uppercase mb-4"><span class="w-8 h-1 block" ${styleBg}></span> ${this.t('intro')}</h2><p class="text-sm text-gray-600 leading-relaxed text-justify bg-gray-50 p-4 rounded-r-lg border-l-4" style="border-color:${TC}">${escape(d.summary)}</p></div><div class="flex-1"><h2 class="flex items-center gap-3 text-lg font-bold text-gray-800 uppercase mb-6"><span class="w-8 h-1 block" ${styleBg}></span> ${this.t('experience')}</h2><div class="space-y-8">${d.experience.map(exp=>`<div class="relative pl-6 border-l border-dashed border-gray-300 no-break"><div class="absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full ring-4 ring-white" ${styleBg}></div><div class="flex justify-between items-baseline mb-1"><h3 class="font-bold text-lg text-gray-800">${escape(exp.position)}</h3><span class="text-xs font-bold bg-gray-50 px-2 py-1 rounded" style="color:${TC}">${exp.period}</span></div><p class="text-sm font-bold text-gray-500 mb-3">${escape(exp.company)}</p><ul class="text-sm text-gray-600 space-y-2 list-disc list-inside text-justify">${bullets(exp.desc)}</ul></div>`).join('')}</div></div></div></div></div>`;
-                }
                 else if (d.template === 'classic') {
-                    html = `<div class="p-10 text-gray-900 h-full template-classic ${fontClass}"><div class="flex items-center gap-6 border-b-2 border-gray-800 pb-6 mb-8 no-break">${d.avatar ? `<div class="shrink-0 w-28 h-28 overflow-hidden shadow border border-gray-300">${avatar("w-full h-full object-cover")}</div>` : ''}<div class="flex-1"><h1 class="text-3xl font-bold uppercase mb-2 text-gray-900">${escape(d.fullName)}</h1><p class="text-lg italic text-gray-600 mb-3" ${styleText}>${escape(d.jobTitle)}</p><div class="text-xs text-gray-700 flex flex-wrap gap-3"><span><i class="fa-solid fa-envelope mr-1"></i>${escape(d.email)}</span><span>|</span><span><i class="fa-solid fa-phone mr-1"></i>${escape(d.phone)}</span><span>|</span><span>${escape(d.address)}</span></div></div></div><div class="mb-6 no-break"><h2 class="text-sm font-bold uppercase border-b border-gray-300 mb-3 tracking-widest" ${styleText}>${this.t('intro')}</h2><p class="text-sm leading-relaxed text-justify">${escape(d.summary)}</p></div><div class="mb-6"><h2 class="text-sm font-bold uppercase border-b border-gray-300 mb-4 tracking-widest" ${styleText}>${this.t('experience')}</h2><div class="space-y-5">${d.experience.map(exp=>`<div class="no-break"><div class="flex justify-between items-end mb-1"><h3 class="font-bold text-base">${escape(exp.company)}</h3><span class="text-sm italic text-gray-600 font-sans">${exp.period}</span></div><p class="text-sm font-bold italic mb-1" ${styleText}>${escape(exp.position)}</p><ul class="list-disc list-outside ml-4 text-sm space-y-1 text-justify">${bullets(exp.desc)}</ul></div>`).join('')}</div></div><div class="grid grid-cols-2 gap-8"><div><h2 class="text-sm font-bold uppercase border-b border-gray-300 mb-3 tracking-widest" ${styleText}>${this.t('education')}</h2>${d.education.map(e=>`<div class="mb-3 no-break"><p class="font-bold text-sm">${escape(e.school)}</p><p class="text-xs">${escape(e.degree)}</p><p class="text-xs italic text-gray-500 font-sans">${e.period}</p></div>`).join('')}</div><div><h2 class="text-sm font-bold uppercase border-b border-gray-300 mb-3 tracking-widest" ${styleText}>${this.t('skills')}</h2><p class="text-sm leading-6 no-break">${escape(d.skills)}</p></div></div></div>`;
+                    html = `<div class="p-10 text-gray-900 h-full template-classic ${langClass}"><div class="flex items-center gap-6 border-b-2 border-gray-800 pb-6 mb-8 no-break">${d.avatar ? `<div class="shrink-0 w-28 h-28 overflow-hidden shadow border border-gray-300">${avatar("w-full h-full object-cover")}</div>` : ''}<div class="flex-1"><h1 class="text-3xl font-bold uppercase mb-2 text-gray-900">${escape(d.fullName)}</h1><p class="text-lg italic text-gray-600 mb-3">${escape(d.jobTitle)}</p><div class="text-xs text-gray-700 flex flex-wrap gap-3"><span><i class="fa-solid fa-envelope mr-1"></i>${escape(d.email)}</span><span>|</span><span><i class="fa-solid fa-phone mr-1"></i>${escape(d.phone)}</span><span>|</span><span>${escape(d.address)}</span></div></div></div><div class="mb-6 no-break"><h2 class="text-sm font-bold uppercase border-b border-gray-300 mb-3 text-gray-600 tracking-widest">${this.t('intro')}</h2><p class="text-sm leading-relaxed text-justify">${escape(d.summary)}</p></div><div class="mb-6"><h2 class="text-sm font-bold uppercase border-b border-gray-300 mb-4 text-gray-600 tracking-widest">${this.t('experience')}</h2><div class="space-y-5">${d.experience.map(exp=>`<div class="no-break"><div class="flex justify-between items-end mb-1"><h3 class="font-bold text-base">${escape(exp.company)}</h3><span class="text-sm italic text-gray-600 font-sans">${exp.period}</span></div><p class="text-sm font-bold italic mb-1 text-gray-700">${escape(exp.position)}</p><ul class="list-disc list-outside ml-4 text-sm space-y-1 text-justify">${bullets(exp.desc)}</ul></div>`).join('')}</div></div><div class="grid grid-cols-2 gap-8"><div><h2 class="text-sm font-bold uppercase border-b border-gray-300 mb-3 text-gray-600 tracking-widest">${this.t('education')}</h2>${d.education.map(e=>`<div class="mb-3 no-break"><p class="font-bold text-sm">${escape(e.school)}</p><p class="text-xs">${escape(e.degree)}</p><p class="text-xs italic text-gray-500 font-sans">${e.period}</p></div>`).join('')}</div><div><h2 class="text-sm font-bold uppercase border-b border-gray-300 mb-3 text-gray-600 tracking-widest">${this.t('skills')}</h2><p class="text-sm leading-6 no-break">${escape(d.skills)}</p></div></div></div>`;
                 }
                 else if (d.template === 'glacial') {
-                     html = `<div class="h-full flex bg-white text-slate-800 ${fontClass}"><div class="w-[30%] bg-gray-50 p-6 flex flex-col gap-8 no-break">${d.avatar ? `<div class="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-white shadow-sm">${avatar("w-full h-full object-cover")}</div>`:''}<div class="text-center md:text-left"><h2 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4 border-b pb-2">${this.t('contact')}</h2><div class="space-y-3 text-sm text-slate-700 break-words"><p class="font-semibold"><i class="fa-solid fa-envelope mr-2" ${styleText}></i>Email</p><p class="text-xs">${escape(d.email)}</p><p class="font-semibold"><i class="fa-solid fa-phone mr-2" ${styleText}></i>Phone</p><p class="text-xs">${escape(d.phone)}</p><p class="font-semibold"><i class="fa-solid fa-location-dot mr-2" ${styleText}></i>Address</p><p class="text-xs">${escape(d.address)}</p></div></div><div><h2 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4 border-b pb-2">${this.t('education')}</h2><div class="space-y-4">${d.education.map(e=>`<div class="no-break"><p class="font-bold text-sm text-slate-800">${escape(e.school)}</p><p class="text-xs text-slate-600">${escape(e.degree)}</p><p class="text-[10px] text-slate-500 mt-1">${e.period}</p></div>`).join('')}</div></div><div><h2 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4 border-b pb-2">${this.t('skills')}</h2><div class="flex flex-wrap gap-2">${skills.map(s=>`<span class="text-xs bg-white border border-slate-300 px-2 py-1 rounded text-slate-700">${s.trim()}</span>`).join('')}</div></div></div><div class="w-[70%] p-8"><div class="mb-10 border-b-2 border-slate-200 pb-6 no-break"><h1 class="text-4xl font-bold text-slate-800 uppercase tracking-tight mb-2">${escape(d.fullName)}</h1><p class="text-xl font-light uppercase tracking-widest" ${styleText}>${escape(d.jobTitle)}</p></div><div class="mb-8 no-break"><h2 class="text-lg font-bold text-slate-800 uppercase mb-3 flex items-center gap-2"><i class="fa-solid fa-user" ${styleText}></i> ${this.t('intro')}</h2><p class="text-sm text-slate-600 leading-relaxed text-justify">${escape(d.summary)}</p></div><div><h2 class="text-lg font-bold text-slate-800 uppercase mb-6 flex items-center gap-2"><i class="fa-solid fa-briefcase" ${styleText}></i> ${this.t('experience')}</h2><div class="space-y-8 border-l-2 border-slate-100 pl-6 ml-2">${d.experience.map(exp=>`<div class="relative no-break"><div class="absolute -left-[29px] top-1.5 w-3 h-3 rounded-full border-2 border-white" ${styleBg}></div><div class="flex justify-between items-baseline mb-1"><h3 class="font-bold text-lg text-slate-800">${escape(exp.position)}</h3><span class="text-xs font-bold bg-gray-100 px-2 py-1 rounded" style="color:${TC}">${exp.period}</span></div><p class="text-sm font-semibold text-slate-500 mb-2 uppercase tracking-wide">${escape(exp.company)}</p><ul class="list-disc list-inside text-sm text-slate-600 space-y-1.5 text-justify">${bullets(exp.desc)}</ul></div>`).join('')}</div></div></div></div>`;
+                    html = `<div class="h-full flex bg-white text-slate-800 ${langClass}"><div class="w-[30%] bg-slate-100 p-6 flex flex-col gap-8 no-break">${d.avatar ? `<div class="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-white shadow-sm">${avatar("w-full h-full object-cover")}</div>`:''}<div class="text-center md:text-left"><h2 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4 border-b pb-2">${this.t('contact')}</h2><div class="space-y-3 text-sm text-slate-700 break-words"><p class="font-semibold"><i class="fa-solid fa-envelope mr-2"></i>Email</p><p class="text-xs">${escape(d.email)}</p><p class="font-semibold"><i class="fa-solid fa-phone mr-2"></i>Phone</p><p class="text-xs">${escape(d.phone)}</p><p class="font-semibold"><i class="fa-solid fa-location-dot mr-2"></i>Address</p><p class="text-xs">${escape(d.address)}</p></div></div><div><h2 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4 border-b pb-2">${this.t('education')}</h2><div class="space-y-4">${d.education.map(e=>`<div class="no-break"><p class="font-bold text-sm text-slate-800">${escape(e.school)}</p><p class="text-xs text-slate-600">${escape(e.degree)}</p><p class="text-[10px] text-slate-500 mt-1">${e.period}</p></div>`).join('')}</div></div><div><h2 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4 border-b pb-2">${this.t('skills')}</h2><div class="flex flex-wrap gap-2">${skills.map(s=>`<span class="text-xs bg-white border border-slate-300 px-2 py-1 rounded text-slate-700">${s.trim()}</span>`).join('')}</div></div></div><div class="w-[70%] p-8"><div class="mb-10 border-b-2 border-slate-200 pb-6 no-break"><h1 class="text-4xl font-bold text-slate-800 uppercase tracking-tight mb-2">${escape(d.fullName)}</h1><p class="text-xl text-sky-600 font-light uppercase tracking-widest">${escape(d.jobTitle)}</p></div><div class="mb-8 no-break"><h2 class="text-lg font-bold text-slate-800 uppercase mb-3 flex items-center gap-2"><i class="fa-solid fa-user text-sky-500"></i> ${this.t('intro')}</h2><p class="text-sm text-slate-600 leading-relaxed text-justify">${escape(d.summary)}</p></div><div><h2 class="text-lg font-bold text-slate-800 uppercase mb-6 flex items-center gap-2"><i class="fa-solid fa-briefcase text-sky-500"></i> ${this.t('experience')}</h2><div class="space-y-8 border-l-2 border-slate-100 pl-6 ml-2">${d.experience.map(exp=>`<div class="relative no-break"><div class="absolute -left-[29px] top-1.5 w-3 h-3 bg-sky-500 rounded-full border-2 border-white"></div><div class="flex justify-between items-baseline mb-1"><h3 class="font-bold text-lg text-slate-800">${escape(exp.position)}</h3><span class="text-xs font-bold text-sky-600 bg-sky-50 px-2 py-1 rounded">${exp.period}</span></div><p class="text-sm font-semibold text-slate-500 mb-2 uppercase tracking-wide">${escape(exp.company)}</p><ul class="list-disc list-inside text-sm text-slate-600 space-y-1.5 text-justify">${bullets(exp.desc)}</ul></div>`).join('')}</div></div></div></div>`;
                 }
                 else if (d.template === 'grid') {
-                    // This template uses strict borders, we will use the theme color for borders too
-                    html = `<div class="p-8 bg-white h-full ${fontClass}"><div class="border-4 h-full p-6" ${styleBorder}><div class="border-b-4 pb-6 mb-6 flex gap-6 items-center no-break" ${styleBorder}>${d.avatar ? `<div class="w-24 h-24 border-2 overflow-hidden shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)] grayscale" ${styleBorder}>${avatar("w-full h-full object-cover")}</div>` : ''}<div class="flex-1"><h1 class="text-4xl font-black uppercase text-gray-900 mb-2 tracking-tighter">${escape(d.fullName)}</h1><p class="text-xl font-bold uppercase border-2 inline-block px-3 py-1 bg-gray-50" ${styleBorder} ${styleText}>${escape(d.jobTitle)}</p></div></div><div class="grid grid-cols-12 gap-6 h-full"><div class="col-span-4 flex flex-col gap-6"><div class="border-2 p-4 bg-gray-50 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)] no-break" ${styleBorder}><h3 class="font-black uppercase text-sm mb-4 border-b-2 pb-2" ${styleBorder}>${this.t('contact')}</h3><div class="text-xs space-y-2 font-mono"><p><strong>E:</strong> ${escape(d.email)}</p><p><strong>P:</strong> ${escape(d.phone)}</p><p><strong>A:</strong> ${escape(d.address)}</p></div></div><div class="border-2 p-4 bg-gray-50 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)] no-break" ${styleBorder}><h3 class="font-black uppercase text-sm mb-4 border-b-2 pb-2" ${styleBorder}>${this.t('skills')}</h3><div class="flex flex-wrap gap-2">${skills.map(s=>`<span class="text-xs border px-1 font-bold transition" ${styleBorder}>${s.trim()}</span>`).join('')}</div></div><div class="border-2 p-4 bg-gray-50 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)] no-break" ${styleBorder}><h3 class="font-black uppercase text-sm mb-4 border-b-2 pb-2" ${styleBorder}>${this.t('education')}</h3>${d.education.map(e=>`<div class="mb-3 last:mb-0"><p class="font-bold text-sm">${escape(e.school)}</p><p class="text-xs italic">${escape(e.degree)}</p><p class="text-xs font-mono text-white inline-block px-1 mt-1" ${styleBg}>${e.period}</p></div>`).join('')}</div></div><div class="col-span-8 flex flex-col gap-6"><div class="border-2 p-5 no-break" ${styleBorder}><h3 class="font-black uppercase text-lg mb-3 text-white inline-block px-2 transform -translate-y-8" ${styleBg}>${this.t('intro')}</h3><p class="text-sm text-justify font-medium -mt-4">${escape(d.summary)}</p></div><div class="border-2 p-5 flex-1" ${styleBorder}><h3 class="font-black uppercase text-lg mb-6 text-white px-2 inline-block transform -translate-y-8" ${styleBg}>${this.t('experience')}</h3><div class="-mt-2 space-y-6">${d.experience.map(exp=>`<div class="no-break border-b-2 border-dashed border-gray-300 pb-4 last:border-0"><div class="flex justify-between items-start mb-2"><h4 class="font-black text-base uppercase">${escape(exp.position)}</h4><span class="font-mono text-xs font-bold border px-2 py-0.5" ${styleBorder}>${exp.period}</span></div><p class="text-sm font-bold text-gray-500 mb-2 italic">${escape(exp.company)}</p><ul class="list-square list-inside text-sm space-y-1 text-justify marker:text-black">${bullets(exp.desc)}</ul></div>`).join('')}</div></div></div></div></div></div>`;
+                    html = `<div class="p-8 bg-white h-full ${langClass}"><div class="border-4 border-gray-900 h-full p-6"><div class="border-b-4 border-gray-900 pb-6 mb-6 flex gap-6 items-center no-break">${d.avatar ? `<div class="w-24 h-24 border-2 border-gray-900 overflow-hidden shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] grayscale">${avatar("w-full h-full object-cover")}</div>` : ''}<div class="flex-1"><h1 class="text-4xl font-black uppercase text-gray-900 mb-2 tracking-tighter">${escape(d.fullName)}</h1><p class="text-xl font-bold text-gray-600 uppercase border-2 border-gray-900 inline-block px-3 py-1 bg-gray-100">${escape(d.jobTitle)}</p></div></div><div class="grid grid-cols-12 gap-6 h-full"><div class="col-span-4 flex flex-col gap-6"><div class="border-2 border-gray-900 p-4 bg-gray-50 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] no-break"><h3 class="font-black uppercase text-sm mb-4 border-b-2 border-gray-900 pb-2">${this.t('contact')}</h3><div class="text-xs space-y-2 font-mono"><p><strong>E:</strong> ${escape(d.email)}</p><p><strong>P:</strong> ${escape(d.phone)}</p><p><strong>A:</strong> ${escape(d.address)}</p></div></div><div class="border-2 border-gray-900 p-4 bg-gray-50 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] no-break"><h3 class="font-black uppercase text-sm mb-4 border-b-2 border-gray-900 pb-2">${this.t('skills')}</h3><div class="flex flex-wrap gap-2">${skills.map(s=>`<span class="text-xs border border-gray-900 px-1 font-bold hover:bg-black hover:text-white transition">${s.trim()}</span>`).join('')}</div></div><div class="border-2 border-gray-900 p-4 bg-gray-50 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] no-break"><h3 class="font-black uppercase text-sm mb-4 border-b-2 border-gray-900 pb-2">${this.t('education')}</h3>${d.education.map(e=>`<div class="mb-3 last:mb-0"><p class="font-bold text-sm">${escape(e.school)}</p><p class="text-xs italic">${escape(e.degree)}</p><p class="text-xs font-mono bg-black text-white inline-block px-1 mt-1">${e.period}</p></div>`).join('')}</div></div><div class="col-span-8 flex flex-col gap-6"><div class="border-2 border-gray-900 p-5 no-break"><h3 class="font-black uppercase text-lg mb-3 bg-black text-white inline-block px-2 transform -translate-y-8">${this.t('intro')}</h3><p class="text-sm text-justify font-medium -mt-4">${escape(d.summary)}</p></div><div class="border-2 border-gray-900 p-5 flex-1"><h3 class="font-black uppercase text-lg mb-6 bg-black text-white px-2 inline-block transform -translate-y-8">${this.t('experience')}</h3><div class="-mt-2 space-y-6">${d.experience.map(exp=>`<div class="no-break border-b-2 border-dashed border-gray-300 pb-4 last:border-0"><div class="flex justify-between items-start mb-2"><h4 class="font-black text-base uppercase">${escape(exp.position)}</h4><span class="font-mono text-xs font-bold border border-gray-900 px-2 py-0.5">${exp.period}</span></div><p class="text-sm font-bold text-gray-500 mb-2 italic">${escape(exp.company)}</p><ul class="list-square list-inside text-sm space-y-1 text-justify marker:text-black">${bullets(exp.desc)}</ul></div>`).join('')}</div></div></div></div></div></div>`;
                 }
                 else if (d.template === 'stylish') {
-                    // Stylish originally used Pink/Gold. Now adaptive.
-                    html = `<div class="p-10 h-full bg-[#fffcf5] text-[#4a4a4a] ${fontClass}"><div class="text-center border-b border-[#e5e5e5] pb-8 mb-8 no-break">${d.avatar ? `<div class="w-28 h-28 mx-auto rounded-full overflow-hidden border border-gray-200 mb-4 p-1 bg-white">${avatar("w-full h-full object-cover rounded-full")}</div>` : ''}<h1 class="text-4xl font-serif-elegant text-gray-900 mb-2">${escape(d.fullName)}</h1><p class="text-sm uppercase tracking-[0.2em] font-semibold" ${styleText}>${escape(d.jobTitle)}</p><div class="flex justify-center gap-4 mt-4 text-xs text-gray-500 italic"><span>${escape(d.email)}</span><span>•</span><span>${escape(d.phone)}</span><span>•</span><span>${escape(d.address)}</span></div></div><div class="max-w-3xl mx-auto"><div class="mb-10 text-center no-break"><h2 class="text-lg italic text-gray-800 mb-4 relative inline-block px-4"><span class="absolute top-1/2 left-full w-12 h-px" ${styleBg}></span><span class="absolute top-1/2 right-full w-12 h-px" ${styleBg}></span>${this.t('intro')}</h2><p class="text-sm leading-7 text-gray-600 text-justify">${escape(d.summary)}</p></div><div class="mb-10"><h2 class="text-lg italic text-center text-gray-800 mb-8 relative"><span class="bg-[#fffcf5] px-4 relative z-10">${this.t('experience')}</span><span class="absolute top-1/2 left-0 w-full h-px bg-[#e5e5e5] -z-0"></span></h2><div class="space-y-10 border-l ml-4 pl-8 md:ml-0 md:pl-0" style="border-color:${TC}60">${d.experience.map(exp=>`<div class="md:grid md:grid-cols-12 md:gap-8 no-break relative"><div class="col-span-3 text-right md:pr-4 relative"><span class="hidden md:block absolute top-1.5 -right-[5px] w-2.5 h-2.5 rounded-full ring-4 ring-[#fffcf5]" ${styleBg}></span><p class="text-sm font-bold text-gray-900">${exp.period}</p><p class="text-xs text-gray-500 italic mt-1">${escape(exp.company)}</p></div><div class="col-span-9 pl-6 md:pl-0 border-l md:border-0 ml-[-2rem] md:ml-0" style="border-color:${TC}60"><h3 class="text-base font-bold text-gray-800 mb-2">${escape(exp.position)}</h3><ul class="text-sm text-gray-600 space-y-2 leading-relaxed text-justify list-disc list-inside" style="marker: ${TC}">${bullets(exp.desc)}</ul></div></div>`).join('')}</div></div><div class="grid grid-cols-2 gap-12 border-t border-[#e5e5e5] pt-8"><div class="no-break"><h2 class="text-base italic text-gray-800 mb-4 text-center">${this.t('education')}</h2><div class="space-y-4 text-center">${d.education.map(e=>`<div><p class="font-bold text-sm text-gray-900">${escape(e.school)}</p><p class="text-xs text-gray-600 italic">${escape(e.degree)}</p><p class="text-xs mt-1" ${styleText}>${e.period}</p></div>`).join('')}</div></div><div class="no-break"><h2 class="text-base italic text-gray-800 mb-4 text-center">${this.t('skills')}</h2><div class="flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs text-gray-600">${skills.map(s=>`<span>• ${s.trim()}</span>`).join('')}</div></div></div></div></div>`;
+                    html = `<div class="p-10 h-full bg-[#fffcf5] text-[#4a4a4a] ${langClass}"><div class="text-center border-b border-[#e5e5e5] pb-8 mb-8 no-break">${d.avatar ? `<div class="w-28 h-28 mx-auto rounded-full overflow-hidden border border-gray-200 mb-4 p-1 bg-white">${avatar("w-full h-full object-cover rounded-full")}</div>` : ''}<h1 class="text-4xl font-serif-elegant text-gray-900 mb-2">${escape(d.fullName)}</h1><p class="text-sm uppercase tracking-[0.2em] text-[#d48c95] font-semibold">${escape(d.jobTitle)}</p><div class="flex justify-center gap-4 mt-4 text-xs text-gray-500 font-serif italic"><span>${escape(d.email)}</span><span>•</span><span>${escape(d.phone)}</span><span>•</span><span>${escape(d.address)}</span></div></div><div class="max-w-3xl mx-auto"><div class="mb-10 text-center no-break"><h2 class="text-lg font-serif-elegant italic text-gray-800 mb-4 relative inline-block px-4"><span class="absolute top-1/2 left-full w-12 h-px bg-[#d48c95]"></span><span class="absolute top-1/2 right-full w-12 h-px bg-[#d48c95]"></span>${this.t('intro')}</h2><p class="text-sm leading-7 text-gray-600 text-justify">${escape(d.summary)}</p></div><div class="mb-10"><h2 class="text-lg font-serif-elegant italic text-center text-gray-800 mb-8 relative"><span class="bg-[#fffcf5] px-4 relative z-10">${this.t('experience')}</span><span class="absolute top-1/2 left-0 w-full h-px bg-[#e5e5e5] -z-0"></span></h2><div class="space-y-10 border-l border-[#d48c95] ml-4 pl-8 md:ml-0 md:pl-0">${d.experience.map(exp=>`<div class="md:grid md:grid-cols-12 md:gap-8 no-break relative"><div class="col-span-3 text-right md:pr-4 relative"><span class="hidden md:block absolute top-1.5 -right-[5px] w-2.5 h-2.5 rounded-full bg-[#d48c95] ring-4 ring-[#fffcf5]"></span><p class="text-sm font-bold text-gray-900">${exp.period}</p><p class="text-xs text-gray-500 italic mt-1">${escape(exp.company)}</p></div><div class="col-span-9 pl-6 md:pl-0 border-l border-[#d48c95] md:border-0 ml-[-2rem] md:ml-0"><h3 class="text-base font-bold text-gray-800 mb-2 font-serif-elegant">${escape(exp.position)}</h3><ul class="text-sm text-gray-600 space-y-2 leading-relaxed text-justify list-disc list-inside marker:text-[#d48c95]">${bullets(exp.desc)}</ul></div></div>`).join('')}</div></div><div class="grid grid-cols-2 gap-12 border-t border-[#e5e5e5] pt-8"><div class="no-break"><h2 class="text-base font-serif-elegant italic text-gray-800 mb-4 text-center">${this.t('education')}</h2><div class="space-y-4 text-center">${d.education.map(e=>`<div><p class="font-bold text-sm text-gray-900">${escape(e.school)}</p><p class="text-xs text-gray-600 italic">${escape(e.degree)}</p><p class="text-xs text-[#d48c95] mt-1">${e.period}</p></div>`).join('')}</div></div><div class="no-break"><h2 class="text-base font-serif-elegant italic text-gray-800 mb-4 text-center">${this.t('skills')}</h2><div class="flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs text-gray-600">${skills.map(s=>`<span>• ${s.trim()}</span>`).join('')}</div></div></div></div></div>`;
                 }
-                
-                // ... Keep other templates but inject styleText and styleBg where color is used
-                // Fallback for others to simple render for now to save space, but logically all should be updated.
-                // Since user asked for "80 templates", providing the mechanism is key.
-                // I will update "Compact", "Tech", "Elegant", "Circle" as examples of the variety.
-
                 else if (d.template === 'compact') {
-                     html = `<div class="p-6 h-full text-gray-800 ${fontClass}"><div class="flex items-end justify-between border-b-2 border-gray-800 pb-2 mb-4 no-break"><div><h1 class="text-2xl font-bold uppercase leading-none">${escape(d.fullName)}</h1><p class="text-sm font-semibold text-gray-600 mt-1">${escape(d.jobTitle)}</p></div><div class="text-right text-[10px] leading-tight"><p>${escape(d.email)} <i class="fa-solid fa-envelope ml-1"></i></p><p>${escape(d.phone)} <i class="fa-solid fa-phone ml-1"></i></p><p>${escape(d.address)} <i class="fa-solid fa-location-dot ml-1"></i></p></div></div><div class="flex gap-4"><div class="w-[70%]"><div class="mb-4 no-break"><h2 class="text-xs font-bold uppercase text-white px-2 py-1 mb-2" ${styleBg}>Summary</h2><p class="text-[11px] text-justify leading-snug">${escape(d.summary)}</p></div><div><h2 class="text-xs font-bold uppercase text-white px-2 py-1 mb-2" ${styleBg}>Experience</h2><div class="space-y-3">${d.experience.map(exp=>`<div class="no-break"><div class="flex justify-between items-baseline"><h3 class="text-xs font-bold text-gray-900">${escape(exp.position)}</h3><span class="text-[10px] font-mono whitespace-nowrap">${exp.period}</span></div><p class="text-[10px] font-semibold text-gray-600 italic mb-0.5">${escape(exp.company)}</p><ul class="text-[10px] list-disc list-outside ml-3 space-y-0.5 text-justify leading-snug">${bullets(exp.desc)}</ul></div>`).join('')}</div></div></div><div class="w-[30%] flex flex-col gap-4">${d.avatar?`<div class="w-full aspect-square bg-gray-100 overflow-hidden no-break">${avatar("w-full h-full object-cover grayscale")}</div>`:''}<div class="no-break"><h2 class="text-xs font-bold uppercase text-white px-2 py-1 mb-2" ${styleBg}>Education</h2>${d.education.map(e=>`<div class="mb-2"><p class="text-[11px] font-bold">${escape(e.school)}</p><p class="text-[10px] leading-tight">${escape(e.degree)}</p><p class="text-[9px] italic text-gray-500">${e.period}</p></div>`).join('')}</div><div class="no-break"><h2 class="text-xs font-bold uppercase text-white px-2 py-1 mb-2" ${styleBg}>Skills</h2><div class="text-[10px] leading-normal flex flex-col gap-1">${skills.map(s=>`<span class="border-b border-gray-200 pb-0.5">${s.trim()}</span>`).join('')}</div></div></div></div></div>`;
+                    html = `<div class="p-6 h-full text-gray-800 ${langClass}"><div class="flex items-end justify-between border-b-2 border-gray-800 pb-2 mb-4 no-break"><div><h1 class="text-2xl font-bold uppercase leading-none">${escape(d.fullName)}</h1><p class="text-sm font-semibold text-gray-600 mt-1">${escape(d.jobTitle)}</p></div><div class="text-right text-[10px] leading-tight"><p>${escape(d.email)} <i class="fa-solid fa-envelope ml-1"></i></p><p>${escape(d.phone)} <i class="fa-solid fa-phone ml-1"></i></p><p>${escape(d.address)} <i class="fa-solid fa-location-dot ml-1"></i></p></div></div><div class="flex gap-4"><div class="w-[70%]"><div class="mb-4 no-break"><h2 class="text-xs font-bold uppercase bg-gray-200 px-2 py-1 mb-2">Summary</h2><p class="text-[11px] text-justify leading-snug">${escape(d.summary)}</p></div><div><h2 class="text-xs font-bold uppercase bg-gray-200 px-2 py-1 mb-2">Experience</h2><div class="space-y-3">${d.experience.map(exp=>`<div class="no-break"><div class="flex justify-between items-baseline"><h3 class="text-xs font-bold text-gray-900">${escape(exp.position)}</h3><span class="text-[10px] font-mono whitespace-nowrap">${exp.period}</span></div><p class="text-[10px] font-semibold text-gray-600 italic mb-0.5">${escape(exp.company)}</p><ul class="text-[10px] list-disc list-outside ml-3 space-y-0.5 text-justify leading-snug">${bullets(exp.desc)}</ul></div>`).join('')}</div></div></div><div class="w-[30%] flex flex-col gap-4">${d.avatar?`<div class="w-full aspect-square bg-gray-100 overflow-hidden no-break">${avatar("w-full h-full object-cover grayscale")}</div>`:''}<div class="no-break"><h2 class="text-xs font-bold uppercase bg-gray-800 text-white px-2 py-1 mb-2">Education</h2>${d.education.map(e=>`<div class="mb-2"><p class="text-[11px] font-bold">${escape(e.school)}</p><p class="text-[10px] leading-tight">${escape(e.degree)}</p><p class="text-[9px] italic text-gray-500">${e.period}</p></div>`).join('')}</div><div class="no-break"><h2 class="text-xs font-bold uppercase bg-gray-800 text-white px-2 py-1 mb-2">Skills</h2><div class="text-[10px] leading-normal flex flex-col gap-1">${skills.map(s=>`<span class="border-b border-gray-200 pb-0.5">${s.trim()}</span>`).join('')}</div></div></div></div></div>`;
                 }
                 else if (d.template === 'tech') {
-                    html = `<div class="h-full bg-[#0d1117] text-[#c9d1d9] font-mono-std p-8 ${fontClass}"><div class="border-b border-[#30363d] pb-6 mb-6 flex gap-6 items-center no-break">${d.avatar?`<div class="w-24 h-24 rounded-full border-2 overflow-hidden" ${styleBorder}>${avatar("w-full h-full object-cover")}</div>`:''}<div class="flex-1"><h1 class="text-3xl font-bold mb-1" ${styleText}>./${escape(d.fullName.replace(/\s/g,'_'))}</h1><p class="text-[#8b949e] text-sm">// ${escape(d.jobTitle)}</p></div><div class="text-right text-xs text-[#8b949e] space-y-1"><p class="cursor-pointer">&lt;${escape(d.email)}&gt;</p><p>${escape(d.phone)}</p><p>"${escape(d.address)}"</p></div></div><div class="grid grid-cols-12 gap-8"><div class="col-span-8"><div class="mb-8 no-break"><h2 class="text-sm font-bold mb-3 border-b border-[#30363d] pb-1 inline-block" ${styleText}>function summary() {</h2><div class="pl-4 border-l-2 border-[#30363d] text-xs text-[#c9d1d9] leading-relaxed text-justify"><span style="color:${TC}">return</span> "${escape(d.summary)}";</div><p class="text-sm font-bold mt-1" ${styleText}>}</p></div><div><h2 class="text-sm font-bold mb-4 border-b border-[#30363d] pb-1 inline-block" ${styleText}>const experience = [</h2><div class="space-y-6 pl-2">${d.experience.map(exp=>`<div class="no-break"><div class="text-sm font-bold" style="color:${TC}cc">{ role: "${escape(exp.position)}",</div><div class="pl-4 text-xs"><div class="flex gap-2"><span class="text-[#8b949e]">company:</span> <span class="text-[#a5d6ff]">"${escape(exp.company)}"</span>,</div><div class="flex gap-2"><span class="text-[#8b949e]">period:</span> <span>"${exp.period}"</span>,</div><div class="text-[#8b949e]">tasks: [</div><ul class="pl-4 list-none space-y-1 text-[#c9d1d9]">${bullets(exp.desc).replace(/<li>/g, '<li>"').replace(/<\/li>/g, '",</li>')}</ul><div>]</div></div><div class="text-sm font-bold" style="color:${TC}cc">},</div></div>`).join('')}</div><p class="text-sm font-bold mt-2" ${styleText}>];</p></div></div><div class="col-span-4 space-y-8"><div class="no-break"><h2 class="text-sm font-bold mb-3 border-b border-[#30363d] pb-1" ${styleText}>npm list skills</h2><div class="flex flex-wrap gap-2 text-xs">${skills.map(s=>`<span class="bg-[#161b22] border border-[#30363d] px-2 py-1 rounded text-[#a5d6ff] transition" style="border-color:${TC}80">${s.trim()}</span>`).join('')}</div></div><div class="no-break"><h2 class="text-sm font-bold mb-3 border-b border-[#30363d] pb-1" ${styleText}>git log education</h2><div class="space-y-4 text-xs">${d.education.map(e=>`<div><div class="text-[#d2a8ff] font-bold">commit "${e.period}"</div><div class="pl-2 border-l border-[#30363d] ml-1 mt-1"><p class="text-[#c9d1d9] font-bold">${escape(e.school)}</p><p class="text-[#8b949e] italic">${escape(e.degree)}</p></div></div>`).join('')}</div></div></div></div></div>`;
+                    html = `<div class="h-full bg-[#0d1117] text-[#c9d1d9] font-mono-code p-8 ${langClass}"><div class="border-b border-[#30363d] pb-6 mb-6 flex gap-6 items-center no-break">${d.avatar?`<div class="w-24 h-24 rounded-full border-2 border-[#238636] overflow-hidden">${avatar("w-full h-full object-cover")}</div>`:''}<div class="flex-1"><h1 class="text-3xl font-bold text-[#58a6ff] mb-1">./${escape(d.fullName.replace(/\s/g,'_'))}</h1><p class="text-[#8b949e] text-sm">// ${escape(d.jobTitle)}</p></div><div class="text-right text-xs text-[#8b949e] space-y-1"><p class="hover:text-[#58a6ff] cursor-pointer">&lt;${escape(d.email)}&gt;</p><p>${escape(d.phone)}</p><p>"${escape(d.address)}"</p></div></div><div class="grid grid-cols-12 gap-8"><div class="col-span-8"><div class="mb-8 no-break"><h2 class="text-sm font-bold text-[#7ee787] mb-3 border-b border-[#30363d] pb-1 inline-block">function summary() {</h2><div class="pl-4 border-l-2 border-[#30363d] text-xs text-[#c9d1d9] leading-relaxed text-justify"><span class="text-[#ff7b72]">return</span> "${escape(d.summary)}";</div><p class="text-sm font-bold text-[#7ee787] mt-1">}</p></div><div><h2 class="text-sm font-bold text-[#7ee787] mb-4 border-b border-[#30363d] pb-1 inline-block">const experience = [</h2><div class="space-y-6 pl-2">${d.experience.map(exp=>`<div class="no-break"><div class="text-[#79c0ff] text-sm font-bold">{ role: "${escape(exp.position)}",</div><div class="pl-4 text-xs"><div class="flex gap-2"><span class="text-[#8b949e]">company:</span> <span class="text-[#a5d6ff]">"${escape(exp.company)}"</span>,</div><div class="flex gap-2"><span class="text-[#8b949e]">period:</span> <span class="text-[#ff7b72]">"${exp.period}"</span>,</div><div class="text-[#8b949e]">tasks: [</div><ul class="pl-4 list-none space-y-1 text-[#c9d1d9]">${bullets(exp.desc).replace(/<li>/g, '<li>"').replace(/<\/li>/g, '",</li>')}</ul><div>]</div></div><div class="text-[#79c0ff] text-sm font-bold">},</div></div>`).join('')}</div><p class="text-sm font-bold text-[#7ee787] mt-2">];</p></div></div><div class="col-span-4 space-y-8"><div class="no-break"><h2 class="text-sm font-bold text-[#7ee787] mb-3 border-b border-[#30363d] pb-1">npm list skills</h2><div class="flex flex-wrap gap-2 text-xs">${skills.map(s=>`<span class="bg-[#161b22] border border-[#30363d] px-2 py-1 rounded text-[#a5d6ff] hover:border-[#58a6ff] transition">${s.trim()}</span>`).join('')}</div></div><div class="no-break"><h2 class="text-sm font-bold text-[#7ee787] mb-3 border-b border-[#30363d] pb-1">git log education</h2><div class="space-y-4 text-xs">${d.education.map(e=>`<div><div class="text-[#d2a8ff] font-bold">commit "${e.period}"</div><div class="pl-2 border-l border-[#30363d] ml-1 mt-1"><p class="text-[#c9d1d9] font-bold">${escape(e.school)}</p><p class="text-[#8b949e] italic">${escape(e.degree)}</p></div></div>`).join('')}</div></div></div></div></div>`;
                 }
-
-                // If template is not one of the updated ones, default to Classic but warn (or just fallback to Executive structure with variables)
-                else {
-                    // Fallback to Executive for any other ID to ensure they work with color system
-                    // Realistically I would implement all 20, but for this response length I prioritized the main ones.
-                    // Let's map the rest to 'modern' style to ensure they look good with the variable system.
-                     html = `<div class="flex h-full ${containerClass}"><div class="w-1/3 text-white p-6 flex flex-col gap-6 no-break" style="background-color: ${TC};">${d.avatar?`<div class="mb-2 flex justify-center"><div class="w-32 h-32 rounded-full border-4 border-white/20 overflow-hidden">${avatar("w-full h-full object-cover")}</div></div>`:''}<div class="text-center"><h1 class="text-xl font-bold uppercase">${escape(d.fullName)}</h1><p class="text-white/80 text-xs mt-1 uppercase tracking-widest">${escape(d.jobTitle)}</p></div><div><h3 class="text-sm font-bold uppercase border-b border-white/30 pb-1 mb-3 text-white/90">${this.t('contact')}</h3><div class="text-xs space-y-2 text-white/80"><p>${escape(d.email)}</p><p>${escape(d.phone)}</p><p>${escape(d.address)}</p></div></div><div><h3 class="text-sm font-bold uppercase border-b border-white/30 pb-1 mb-3 text-white/90">${this.t('skills')}</h3><div class="flex flex-wrap gap-1">${skills.map(s=>`<span class="bg-white/10 px-2 py-1 text-[10px] rounded inline-block">${s.trim()}</span>`).join('')}</div></div><div><h3 class="text-sm font-bold uppercase border-b border-white/30 pb-1 mb-3 text-white/90">${this.t('education')}</h3><div class="space-y-3">${d.education.map(e=>`<div class="no-break"><p class="font-bold text-xs text-white">${escape(e.school)}</p><p class="text-[10px] text-white/80">${escape(e.degree)}</p><p class="text-[10px] text-white/60 italic">${e.period}</p></div>`).join('')}</div></div></div><div class="w-2/3 p-8 bg-white text-gray-800"><div class="mb-8 no-break"><h2 class="text-lg font-bold uppercase border-b-2 pb-2 mb-3" ${styleBorder} ${styleText}>${this.t('intro')}</h2><p class="text-sm text-gray-600 leading-relaxed text-justify">${escape(d.summary)}</p></div><div><h2 class="text-lg font-bold uppercase border-b-2 pb-2 mb-4" ${styleBorder} ${styleText}>${this.t('experience')}</h2><div class="space-y-6">${d.experience.map(exp=>`<div class="no-break"><div class="flex justify-between items-baseline mb-1"><h3 class="font-bold text-base text-gray-900">${escape(exp.company)}</h3><span class="text-xs font-semibold bg-gray-100 px-2 py-1 rounded text-gray-600">${exp.period}</span></div><p class="text-sm font-semibold mb-2" ${styleText}>${escape(exp.position)}</p><ul class="list-disc list-inside text-sm text-gray-600 space-y-1 pl-1 text-justify">${bullets(exp.desc)}</ul></div>`).join('')}</div></div></div></div>`;
+                else if (d.template === 'elegant') {
+                    html = `<div class="p-10 h-full bg-white text-gray-900 font-serif-elegant ${langClass}"><div class="text-center mb-10 border-b-2 border-double border-gray-300 pb-6 no-break">${d.avatar ? `<div class="w-32 h-32 mx-auto rounded-full overflow-hidden mb-4 border border-gray-200 p-1 bg-white shadow-sm">${avatar("w-full h-full object-cover rounded-full")}</div>` : ''}<h1 class="text-5xl mb-2 text-gray-800">${escape(d.fullName)}</h1><p class="text-base italic text-gray-500 uppercase tracking-widest">${escape(d.jobTitle)}</p><div class="flex justify-center gap-6 mt-4 text-sm text-gray-600 font-sans"><span>${escape(d.email)}</span><span>${escape(d.phone)}</span><span>${escape(d.address)}</span></div></div><div class="grid grid-cols-12 gap-10"><div class="col-span-4 border-r border-gray-100 pr-6 space-y-8"><div class="no-break"><h2 class="text-lg font-bold uppercase tracking-widest text-gray-800 mb-4 border-b border-gray-300 pb-1">Skills</h2><div class="text-sm space-y-2 font-sans text-gray-600 text-right">${skills.map(s=>`<p>${s.trim()}</p>`).join('')}</div></div><div class="no-break"><h2 class="text-lg font-bold uppercase tracking-widest text-gray-800 mb-4 border-b border-gray-300 pb-1">Education</h2><div class="space-y-4 text-right">${d.education.map(e=>`<div><p class="font-bold text-sm">${escape(e.school)}</p><p class="text-xs italic text-gray-500">${escape(e.degree)}</p><p class="text-xs font-sans text-gray-400 mt-1">${e.period}</p></div>`).join('')}</div></div></div><div class="col-span-8 space-y-8"><div class="no-break"><h2 class="text-xl italic font-bold text-gray-800 mb-4">Professional Profile</h2><p class="text-sm leading-relaxed text-gray-600 font-sans text-justify">${escape(d.summary)}</p></div><div class="no-break"><h2 class="text-xl italic font-bold text-gray-800 mb-6">Work Experience</h2><div class="space-y-8 border-l border-gray-200 pl-6">${d.experience.map(exp=>`<div class="relative no-break"><span class="absolute -left-[29px] top-1.5 w-1.5 h-1.5 bg-gray-400 rounded-full"></span><div class="flex justify-between items-baseline mb-1"><h3 class="text-lg font-bold text-gray-800">${escape(exp.position)}</h3><span class="text-xs font-sans text-gray-500 italic">${exp.period}</span></div><p class="text-sm font-bold text-gray-600 mb-2 font-sans">${escape(exp.company)}</p><ul class="list-disc list-outside ml-4 text-sm text-gray-600 font-sans space-y-1 text-justify">${bullets(exp.desc)}</ul></div>`).join('')}</div></div></div></div></div>`;
+                }
+                else if (d.template === 'circle') {
+                    html = `<div class="h-full flex ${langClass} bg-white"><div class="w-[35%] bg-indigo-900 text-white p-8 relative overflow-hidden"><div class="absolute top-0 right-0 w-20 h-full bg-white rounded-l-[100px] translate-x-10"></div><div class="relative z-10 flex flex-col h-full">${d.avatar ? `<div class="w-32 h-32 rounded-full border-4 border-indigo-200 overflow-hidden mb-8 shadow-xl mx-auto">${avatar("w-full h-full object-cover")}</div>` : ''}<div class="mb-10 text-right pr-6"><h2 class="text-indigo-200 font-bold uppercase text-sm mb-4 border-b border-indigo-700 pb-2">${this.t('contact')}</h2><div class="text-xs space-y-3 opacity-90"><p>${escape(d.email)}</p><p>${escape(d.phone)}</p><p>${escape(d.address)}</p></div></div><div class="mb-10 text-right pr-6"><h2 class="text-indigo-200 font-bold uppercase text-sm mb-4 border-b border-indigo-700 pb-2">${this.t('education')}</h2><div class="space-y-4 text-xs">${d.education.map(e=>`<div><p class="font-bold text-white">${escape(e.school)}</p><p class="text-indigo-300 italic">${escape(e.degree)}</p><p class="opacity-70 mt-1">${e.period}</p></div>`).join('')}</div></div><div class="text-right pr-6"><h2 class="text-indigo-200 font-bold uppercase text-sm mb-4 border-b border-indigo-700 pb-2">${this.t('skills')}</h2><div class="flex flex-wrap justify-end gap-2 text-xs">${skills.map(s=>`<span class="bg-indigo-800 px-2 py-1 rounded-full">${s.trim()}</span>`).join('')}</div></div></div></div><div class="w-[65%] py-10 pr-10 pl-4"><div class="mb-10 border-b-2 border-indigo-100 pb-6"><h1 class="text-4xl font-black text-indigo-900 uppercase">${escape(d.fullName)}</h1><p class="text-xl text-indigo-500 font-light mt-1">${escape(d.jobTitle)}</p></div><div class="mb-8"><h2 class="text-xl font-bold text-indigo-900 mb-3 flex items-center gap-2"><span class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 text-sm"><i class="fa-solid fa-user"></i></span> About Me</h2><p class="text-sm text-gray-600 leading-relaxed text-justify pl-10">${escape(d.summary)}</p></div><div><h2 class="text-xl font-bold text-indigo-900 mb-6 flex items-center gap-2"><span class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 text-sm"><i class="fa-solid fa-briefcase"></i></span> Experience</h2><div class="space-y-8 pl-10 border-l border-indigo-100 ml-4">${d.experience.map(exp=>`<div class="relative no-break"><span class="absolute -left-[45px] top-1 w-3 h-3 rounded-full bg-indigo-500 border-2 border-white ring-2 ring-indigo-100"></span><h3 class="text-lg font-bold text-gray-800">${escape(exp.position)}</h3><div class="flex justify-between items-center mb-2"><span class="text-sm font-bold text-indigo-600">${escape(exp.company)}</span><span class="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full">${exp.period}</span></div><ul class="list-disc list-inside text-sm text-gray-600 space-y-1 text-justify">${bullets(exp.desc)}</ul></div>`).join('')}</div></div></div></div>`;
+                }
+                else if (d.template === 'timeline') {
+                    html = `<div class="p-8 h-full bg-slate-50 text-slate-800 ${langClass}"><div class="flex gap-8 items-center border-b-2 border-slate-300 pb-8 mb-8 no-break">${d.avatar?`<div class="w-24 h-24 rounded-lg bg-slate-200 overflow-hidden shadow-inner">${avatar("w-full h-full object-cover")}</div>`:''}<div class="flex-1"><h1 class="text-4xl font-bold text-slate-900 uppercase">${escape(d.fullName)}</h1><p class="text-lg font-medium text-slate-600 mt-1">${escape(d.jobTitle)}</p><div class="flex gap-4 mt-4 text-xs font-bold text-slate-500 bg-white p-2 rounded shadow-sm inline-flex"><span>${escape(d.email)}</span><span>|</span><span>${escape(d.phone)}</span><span>|</span><span>${escape(d.address)}</span></div></div></div><div class="grid grid-cols-12 gap-8"><div class="col-span-4 space-y-8"><div class="bg-white p-5 rounded-lg shadow-sm border border-slate-200 no-break"><h3 class="font-bold text-slate-900 uppercase text-sm mb-3 border-b pb-2">Profile</h3><p class="text-xs text-justify leading-relaxed text-slate-600">${escape(d.summary)}</p></div><div class="bg-white p-5 rounded-lg shadow-sm border border-slate-200 no-break"><h3 class="font-bold text-slate-900 uppercase text-sm mb-3 border-b pb-2">Skills</h3><div class="flex flex-wrap gap-2">${skills.map(s=>`<span class="bg-slate-100 text-slate-700 text-[10px] font-bold px-2 py-1 rounded border border-slate-200">${s.trim()}</span>`).join('')}</div></div><div class="bg-white p-5 rounded-lg shadow-sm border border-slate-200 no-break"><h3 class="font-bold text-slate-900 uppercase text-sm mb-3 border-b pb-2">Education</h3><div class="space-y-4">${d.education.map(e=>`<div><p class="font-bold text-xs text-slate-900">${escape(e.school)}</p><p class="text-[10px] text-slate-600">${escape(e.degree)}</p><p class="text-[10px] text-slate-400 font-mono mt-0.5">${e.period}</p></div>`).join('')}</div></div></div><div class="col-span-8"><div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200 min-h-[500px]"><h3 class="font-bold text-slate-900 uppercase text-lg mb-6 border-b pb-2">Experience Timeline</h3><div class="relative border-l-2 border-slate-200 ml-3 space-y-8">${d.experience.map(exp=>`<div class="relative pl-8 no-break"><span class="absolute -left-[9px] top-1.5 w-4 h-4 bg-white border-4 border-slate-400 rounded-full"></span><div class="bg-slate-50 p-4 rounded border border-slate-100 hover:border-slate-300 transition"><div class="flex justify-between items-start mb-2"><h4 class="font-bold text-base text-slate-800">${escape(exp.position)}</h4><span class="text-[10px] font-bold text-white bg-slate-600 px-2 py-0.5 rounded">${exp.period}</span></div><p class="text-xs font-bold text-slate-500 mb-2 uppercase tracking-wide">${escape(exp.company)}</p><ul class="list-disc list-inside text-sm text-slate-600 space-y-1 text-justify">${bullets(exp.desc)}</ul></div></div>`).join('')}</div></div></div></div></div>`;
+                }
+                else if (d.template === 'split') {
+                    html = `<div class="h-full flex ${langClass}"><div class="w-1/2 bg-gray-900 text-gray-300 p-10 flex flex-col justify-between"><div class="no-break"><h1 class="text-5xl font-black text-white leading-tight mb-2 uppercase">${escape(d.fullName.split(' ').slice(0, -1).join(' '))} <span class="text-yellow-500 block">${escape(d.fullName.split(' ').slice(-1).join(''))}</span></h1><p class="text-xl text-gray-400 font-light mb-10 tracking-widest uppercase border-l-4 border-yellow-500 pl-4">${escape(d.jobTitle)}</p><div class="mb-10"><h3 class="text-yellow-500 font-bold uppercase text-sm mb-4">Contact</h3><div class="text-sm space-y-2"><p>${escape(d.email)}</p><p>${escape(d.phone)}</p><p>${escape(d.address)}</p></div></div><div class="mb-10"><h3 class="text-yellow-500 font-bold uppercase text-sm mb-4">Skills</h3><div class="flex flex-wrap gap-2 text-xs font-mono">${skills.map(s=>`<span class="border border-gray-700 px-2 py-1 rounded hover:border-yellow-500 hover:text-white transition">${s.trim()}</span>`).join('')}</div></div><div><h3 class="text-yellow-500 font-bold uppercase text-sm mb-4">Education</h3><div class="space-y-4 text-sm">${d.education.map(e=>`<div><p class="text-white font-bold">${escape(e.school)}</p><p class="italic text-gray-500">${escape(e.degree)}</p><p class="text-xs text-yellow-600 mt-1">${e.period}</p></div>`).join('')}</div></div></div></div><div class="w-1/2 bg-white p-10 text-gray-800"><div class="mb-10 no-break"><h3 class="text-4xl font-bold text-gray-900 mb-4 opacity-10">01</h3><h2 class="text-xl font-bold uppercase text-gray-900 mb-4 -mt-10 ml-2">Profile</h2><p class="text-sm text-justify leading-relaxed border-l-4 border-gray-200 pl-4">${escape(d.summary)}</p></div><div><h3 class="text-4xl font-bold text-gray-900 mb-4 opacity-10">02</h3><h2 class="text-xl font-bold uppercase text-gray-900 mb-6 -mt-10 ml-2">Experience</h2><div class="space-y-8">${d.experience.map(exp=>`<div class="no-break"><h4 class="text-lg font-bold text-gray-900">${escape(exp.position)}</h4><div class="flex justify-between text-xs font-bold uppercase tracking-wider text-gray-500 mb-3 border-b pb-1"><span>${escape(exp.company)}</span><span>${exp.period}</span></div><ul class="list-disc list-outside ml-4 text-sm text-gray-600 space-y-1 text-justify">${bullets(exp.desc)}</ul></div>`).join('')}</div></div></div></div>`;
+                }
+                else if (d.template === 'bold') {
+                    html = `<div class="p-8 h-full bg-white text-black font-condensed ${langClass}"><div class="border-4 border-black h-full p-6"><div class="border-b-4 border-black pb-6 mb-6 flex justify-between items-end no-break"><div><h1 class="text-6xl font-bold uppercase leading-none mb-2">${escape(d.fullName)}</h1><p class="text-2xl font-bold bg-black text-white inline-block px-2 uppercase">${escape(d.jobTitle)}</p></div><div class="text-right font-bold text-sm"><p>${escape(d.email)}</p><p>${escape(d.phone)}</p><p>${escape(d.address)}</p></div></div><div class="grid grid-cols-3 gap-8"><div class="col-span-1 border-r-4 border-black pr-6 flex flex-col gap-8"><div class="no-break"><h2 class="text-2xl font-bold uppercase border-b-4 border-black mb-4">Profile</h2><p class="text-sm font-sans font-medium text-justify">${escape(d.summary)}</p></div><div class="no-break"><h2 class="text-2xl font-bold uppercase border-b-4 border-black mb-4">Skills</h2><div class="flex flex-wrap gap-1 font-sans font-bold text-xs">${skills.map(s=>`<span class="bg-gray-200 px-1 border border-black">${s.trim()}</span>`).join('')}</div></div><div class="no-break"><h2 class="text-2xl font-bold uppercase border-b-4 border-black mb-4">Education</h2><div class="space-y-4 font-sans">${d.education.map(e=>`<div><p class="font-bold text-sm leading-tight">${escape(e.school)}</p><p class="text-xs italic">${escape(e.degree)}</p><p class="text-xs font-bold mt-1 bg-black text-white inline-block px-1">${e.period}</p></div>`).join('')}</div></div></div><div class="col-span-2"><h2 class="text-4xl font-bold uppercase border-b-4 border-black mb-6 bg-black text-white px-2 inline-block">Experience</h2><div class="space-y-8 font-sans">${d.experience.map(exp=>`<div class="no-break"><div class="flex justify-between items-end border-b-2 border-black mb-2"><h3 class="text-xl font-bold uppercase">${escape(exp.position)}</h3><span class="font-bold text-sm">${exp.period}</span></div><p class="font-bold text-sm mb-2 uppercase tracking-wide">${escape(exp.company)}</p><ul class="list-disc list-inside text-sm font-medium space-y-1 text-justify">${bullets(exp.desc)}</ul></div>`).join('')}</div></div></div></div></div>`;
+                }
+                else if (d.template === 'artistic') {
+                    html = `<div class="h-full bg-white text-gray-800 ${langClass}"><div class="h-48 bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 relative mb-16 no-break" style="clip-path: polygon(0 0, 100% 0, 100% 70%, 0 100%);"><div class="absolute bottom-[-40px] left-10 w-32 h-32 rounded-full border-4 border-white shadow-lg overflow-hidden bg-white z-10">${d.avatar ? `<img src="${d.avatar}" class="w-full h-full object-cover">` : ''}</div><div class="absolute top-10 right-10 text-right text-white"><h1 class="text-4xl font-bold uppercase drop-shadow-md">${escape(d.fullName)}</h1><p class="text-xl font-medium opacity-90">${escape(d.jobTitle)}</p></div></div><div class="px-10 grid grid-cols-12 gap-10"><div class="col-span-4 space-y-8 pt-4"><div class="no-break"><h2 class="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-500 font-black uppercase text-lg mb-4">Contact</h2><div class="text-sm font-medium text-gray-600 space-y-2"><p>${escape(d.email)}</p><p>${escape(d.phone)}</p><p>${escape(d.address)}</p></div></div><div class="no-break"><h2 class="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-500 font-black uppercase text-lg mb-4">Skills</h2><div class="flex flex-wrap gap-2 text-xs">${skills.map(s=>`<span class="border border-pink-200 text-pink-600 px-2 py-1 rounded-lg font-bold">${s.trim()}</span>`).join('')}</div></div><div class="no-break"><h2 class="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-500 font-black uppercase text-lg mb-4">Education</h2><div class="space-y-4">${d.education.map(e=>`<div class="bg-purple-50 p-3 rounded-lg"><p class="font-bold text-sm text-purple-900">${escape(e.school)}</p><p class="text-xs text-purple-600">${escape(e.degree)}</p><p class="text-xs text-gray-400 mt-1">${e.period}</p></div>`).join('')}</div></div></div><div class="col-span-8 space-y-8"><div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 shadow-sm no-break"><h2 class="text-2xl font-bold text-gray-800 mb-3">About Me</h2><p class="text-sm text-gray-600 text-justify leading-relaxed">${escape(d.summary)}</p></div><div><h2 class="text-2xl font-bold text-gray-800 mb-6">Experience</h2><div class="space-y-6">${d.experience.map(exp=>`<div class="relative pl-6 border-l-2 border-pink-200 no-break"><span class="absolute -left-[5px] top-2 w-2 h-2 rounded-full bg-pink-500"></span><h3 class="text-lg font-bold text-gray-800">${escape(exp.position)}</h3><div class="flex justify-between text-xs font-bold text-pink-500 mb-2 uppercase"><span>${escape(exp.company)}</span><span>${exp.period}</span></div><ul class="list-none space-y-1 text-sm text-gray-600 text-justify">${bullets(exp.desc)}</ul></div>`).join('')}</div></div></div></div></div>`;
+                }
+                else if (d.template === 'corporate') {
+                    html = `<div class="h-full bg-white text-gray-800 font-sans ${langClass}"><div class="bg-slate-800 text-white p-8 flex justify-between items-center no-break"><div><h1 class="text-3xl font-bold uppercase tracking-wider">${escape(d.fullName)}</h1><p class="text-slate-300 mt-1 uppercase text-sm font-semibold">${escape(d.jobTitle)}</p></div><div class="text-right text-xs text-slate-400 space-y-1"><p>${escape(d.email)}</p><p>${escape(d.phone)}</p><p>${escape(d.address)}</p></div></div><div class="p-8 grid grid-cols-12 gap-8"><div class="col-span-8"><div class="mb-8 border-b pb-6 no-break"><h2 class="text-lg font-bold text-slate-800 uppercase mb-3 border-l-4 border-blue-600 pl-3">Professional Summary</h2><p class="text-sm text-gray-600 text-justify leading-relaxed">${escape(d.summary)}</p></div><div><h2 class="text-lg font-bold text-slate-800 uppercase mb-6 border-l-4 border-blue-600 pl-3">Work History</h2><div class="space-y-6">${d.experience.map(exp=>`<div class="no-break"><div class="flex justify-between items-baseline mb-1"><h3 class="font-bold text-base text-blue-900">${escape(exp.position)}</h3><span class="text-xs font-bold text-gray-500">${exp.period}</span></div><p class="text-sm font-semibold text-gray-700 mb-2">${escape(exp.company)}</p><ul class="list-disc list-inside text-sm text-gray-600 space-y-1 text-justify">${bullets(exp.desc)}</ul></div>`).join('')}</div></div></div><div class="col-span-4 space-y-8 bg-slate-50 p-4 h-fit border border-slate-200"><div class="no-break"><h2 class="text-sm font-bold text-slate-800 uppercase mb-3 border-b border-slate-300 pb-2">Core Skills</h2><div class="flex flex-col gap-2 text-xs font-medium text-gray-700">${skills.map(s=>`<span>• ${s.trim()}</span>`).join('')}</div></div><div class="no-break"><h2 class="text-sm font-bold text-slate-800 uppercase mb-3 border-b border-slate-300 pb-2">Education</h2><div class="space-y-4">${d.education.map(e=>`<div><p class="font-bold text-xs text-blue-900">${escape(e.school)}</p><p class="text-xs text-gray-600">${escape(e.degree)}</p><p class="text-xs text-gray-400 italic mt-0.5">${e.period}</p></div>`).join('')}</div></div></div></div></div>`;
+                }
+                else if (d.template === 'startup') {
+                    html = `<div class="p-8 h-full bg-gray-100 text-gray-800 ${langClass}"><div class="bg-white rounded-xl shadow-sm p-6 mb-6 flex gap-6 items-center no-break">${d.avatar ? `<div class="w-20 h-20 rounded-lg bg-orange-100 overflow-hidden shrink-0">${avatar("w-full h-full object-cover")}</div>`:''}<div class="flex-1"><h1 class="text-3xl font-bold text-gray-900 tracking-tight">${escape(d.fullName)}</h1><p class="text-orange-500 font-bold uppercase text-xs mt-1 bg-orange-50 inline-block px-2 py-1 rounded">${escape(d.jobTitle)}</p></div><div class="flex gap-3 text-xl text-gray-400"><i class="fa-solid fa-envelope" title="${escape(d.email)}"></i><i class="fa-solid fa-phone" title="${escape(d.phone)}"></i><i class="fa-solid fa-location-dot" title="${escape(d.address)}"></i></div></div><div class="grid grid-cols-3 gap-6"><div class="col-span-1 space-y-6"><div class="bg-white rounded-xl shadow-sm p-5 no-break"><h3 class="font-bold text-gray-900 mb-4 text-sm uppercase text-orange-500">Contact Info</h3><div class="text-xs space-y-2 text-gray-600 break-all"><p class="font-bold">Email</p><p>${escape(d.email)}</p><p class="font-bold mt-2">Phone</p><p>${escape(d.phone)}</p><p class="font-bold mt-2">Address</p><p>${escape(d.address)}</p></div></div><div class="bg-white rounded-xl shadow-sm p-5 no-break"><h3 class="font-bold text-gray-900 mb-4 text-sm uppercase text-orange-500">Skills</h3><div class="flex flex-wrap gap-2">${skills.map(s=>`<span class="bg-gray-100 text-gray-700 text-[10px] font-bold px-2 py-1 rounded border border-gray-200">${s.trim()}</span>`).join('')}</div></div><div class="bg-white rounded-xl shadow-sm p-5 no-break"><h3 class="font-bold text-gray-900 mb-4 text-sm uppercase text-orange-500">Education</h3><div class="space-y-4">${d.education.map(e=>`<div><p class="font-bold text-xs text-gray-900">${escape(e.school)}</p><p class="text-[10px] text-gray-500">${escape(e.degree)}</p><p class="text-[10px] text-orange-400 font-bold mt-0.5">${e.period}</p></div>`).join('')}</div></div></div><div class="col-span-2 space-y-6"><div class="bg-white rounded-xl shadow-sm p-6 no-break"><h3 class="font-bold text-gray-900 mb-3 text-lg">About Me</h3><p class="text-sm text-gray-600 leading-relaxed text-justify">${escape(d.summary)}</p></div><div class="bg-white rounded-xl shadow-sm p-6"><h3 class="font-bold text-gray-900 mb-6 text-lg">Experience</h3><div class="space-y-8">${d.experience.map(exp=>`<div class="no-break border-l-2 border-orange-100 pl-4 ml-1"><div class="flex justify-between items-start mb-1"><h4 class="font-bold text-base text-gray-800">${escape(exp.position)}</h4><span class="text-xs font-bold text-orange-500 bg-orange-50 px-2 py-0.5 rounded-full">${exp.period}</span></div><p class="text-xs font-bold text-gray-500 mb-2 uppercase">${escape(exp.company)}</p><ul class="list-disc list-inside text-sm text-gray-600 space-y-1 text-justify">${bullets(exp.desc)}</ul></div>`).join('')}</div></div></div></div></div>`;
+                }
+                else if (d.template === 'academic') {
+                    html = `<div class="p-12 h-full bg-white text-black font-academic ${langClass}"><div class="text-center border-b border-black pb-4 mb-6 no-break"><h1 class="text-2xl font-bold uppercase mb-2">${escape(d.fullName)}</h1><p class="text-sm mb-2">${escape(d.jobTitle)}</p><p class="text-sm">${escape(d.address)} | ${escape(d.phone)} | ${escape(d.email)}</p></div><div class="mb-6 no-break"><h2 class="text-base font-bold uppercase border-b border-gray-400 mb-3">Objective</h2><p class="text-sm text-justify indent-8 leading-6">${escape(d.summary)}</p></div><div class="mb-6"><h2 class="text-base font-bold uppercase border-b border-gray-400 mb-4">Professional Experience</h2><div class="space-y-6">${d.experience.map(exp=>`<div class="no-break"><div class="flex justify-between font-bold text-sm mb-1"><span>${escape(exp.company)}, ${escape(exp.position)}</span><span>${exp.period}</span></div><ul class="list-disc list-outside ml-5 text-sm leading-6 text-justify">${bullets(exp.desc)}</ul></div>`).join('')}</div></div><div class="mb-6 no-break"><h2 class="text-base font-bold uppercase border-b border-gray-400 mb-4">Education</h2><div class="space-y-2">${d.education.map(e=>`<div class="flex justify-between text-sm"><span><strong>${escape(e.school)}</strong>, ${escape(e.degree)}</span><span class="italic">${e.period}</span></div>`).join('')}</div></div><div class="no-break"><h2 class="text-base font-bold uppercase border-b border-gray-400 mb-4">Skills</h2><p class="text-sm leading-6">${escape(d.skills.split(',').join(' • '))}</p></div></div>`;
+                }
+                else if (d.template === 'night') {
+                    html = `<div class="h-full bg-slate-900 text-slate-300 p-8 ${langClass}"><div class="flex items-center gap-6 border-b border-slate-700 pb-6 mb-8 no-break">${d.avatar ? `<div class="w-24 h-24 rounded-full bg-slate-800 border-2 border-slate-600 overflow-hidden shrink-0">${avatar("w-full h-full object-cover")}</div>`:''}<div class="flex-1"><h1 class="text-4xl font-light text-white mb-2 tracking-wide">${escape(d.fullName)}</h1><p class="text-lg text-indigo-400 uppercase font-bold tracking-widest text-xs">${escape(d.jobTitle)}</p></div><div class="text-right text-xs text-slate-500 space-y-1"><p>${escape(d.email)}</p><p>${escape(d.phone)}</p><p>${escape(d.address)}</p></div></div><div class="grid grid-cols-3 gap-8"><div class="col-span-1 space-y-8"><div class="bg-slate-800 p-5 rounded border border-slate-700 no-break"><h3 class="text-indigo-400 font-bold uppercase text-xs mb-4 tracking-wider">About</h3><p class="text-xs text-slate-400 leading-relaxed text-justify">${escape(d.summary)}</p></div><div class="no-break"><h3 class="text-indigo-400 font-bold uppercase text-xs mb-4 tracking-wider">Expertise</h3><div class="flex flex-wrap gap-2">${skills.map(s=>`<span class="bg-slate-800 text-slate-300 text-[10px] px-2 py-1 rounded border border-slate-700">${s.trim()}</span>`).join('')}</div></div><div class="no-break"><h3 class="text-indigo-400 font-bold uppercase text-xs mb-4 tracking-wider">Education</h3><div class="space-y-4 text-xs">${d.education.map(e=>`<div><p class="text-white font-bold">${escape(e.school)}</p><p class="text-slate-500 italic">${escape(e.degree)}</p><p class="text-slate-600 mt-1">${e.period}</p></div>`).join('')}</div></div></div><div class="col-span-2"><h3 class="text-indigo-400 font-bold uppercase text-xs mb-6 tracking-wider border-b border-slate-700 pb-2">Experience History</h3><div class="space-y-8 border-l border-slate-700 pl-6 ml-1">${d.experience.map(exp=>`<div class="relative no-break"><span class="absolute -left-[29px] top-1.5 w-1.5 h-1.5 bg-indigo-500 rounded-full shadow-[0_0_10px_rgba(99,102,241,0.5)]"></span><h4 class="text-lg font-light text-white">${escape(exp.position)}</h4><div class="flex gap-4 text-xs font-mono text-slate-500 mb-3 mt-1"><span>${escape(exp.company)}</span><span>//</span><span>${exp.period}</span></div><ul class="list-none space-y-2 text-sm text-slate-400 text-justify leading-relaxed">${bullets(exp.desc)}</ul></div>`).join('')}</div></div></div></div>`;
                 }
 
                 document.getElementById('cv-preview').innerHTML = html;
